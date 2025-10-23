@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+title: "Entangled Co-Learning for LLMs — Prompt Atlas Edition"
+message: "If you use this repo, please cite it."
+authors:
+  - family-names: "Tadaya"
+    given-names: "Don D. M."
+    website: "https://dascient.com"
+  - family-names: "Your-Org"
+    given-names: "Team"
+license: "Apache-2.0"

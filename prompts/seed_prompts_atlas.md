@@ -1,0 +1,4 @@
+- Profit & Purpose: “How can this system create value without extracting it from community/ecology?”
+- Creativity & Myth: “What story does this design let users tell about themselves?”
+- Science & Unknowns: “Where are the sharp uncertainties, and how do we keep them visible?”
+- Psychology: “Which cognitive biases could degrade outcomes here, and how do we blunt them?”
