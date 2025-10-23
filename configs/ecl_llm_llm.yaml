@@ -1,35 +1,12 @@
-seed: 17
-device: cuda
-batch_size: 4
-max_steps: 30000
-eval_every: 500
-save_every: 1000
-
+device: auto
 state_dim: 64
-latent_dim: 16
-summary_dim: 256
+batch_size: 4
+max_steps: 1000
+eval_every: 100
 infoNCE_tau: 0.1
-
 loss_weights:
   lat: 0.5
   mi: 1.0
   u: 0.25
   con: 1.0
   div: 0.2
-
-models:
-  writer_name: "meta-llama/Meta-Llama-3-8B-Instruct"
-  tester_name: "Qwen/Qwen2.5-7B-Instruct"
-  lora_r: 16
-  lora_alpha: 32
-  lora_dropout: 0.05
-  freeze_base: true
-
-data:
-  train_jsonl: "data/train.jsonl"
-  val_jsonl: "data/val.jsonl"
-
-schemas:
-  brief: "configs/schemas/brief.schema.json"
-  spec:  "configs/schemas/spec.schema.json"
-  tests: "configs/schemas/tests.schema.json"
