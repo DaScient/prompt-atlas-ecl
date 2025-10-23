@@ -5,7 +5,7 @@
 The Prompt Atlas Engine (PAE) is a live research platform designed to explore entanglement-based co-learning between large language models (LLMs), humans, and data streams.
 It unifies Generative AI and Quantum-Inspired Information Theory through an evolving API layer and an Entanglement Co-Learning (ECL) core — a minimal but expressive architecture for training, reasoning, and experimentation.
 
-⸻
+
 
 ## 🧭 Overview
 
@@ -17,13 +17,13 @@ The Prompt Atlas Engine provides:
 
 It’s both a sandbox for AI researchers and a foundation for building distributed intelligence systems.
 
-⸻
+
 
 ## 🚀 Quickstart
 
 1. Environment Setup
 
-git clone https://github.com/<your-username>/prompt-atlas-ecl.git
+git clone https://github.com/dascient/prompt-atlas-ecl.git
 cd prompt-atlas-ecl
 python -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
@@ -36,7 +36,7 @@ python -m src.train_ecl
 
 This runs the EntanglementBus GRU, applying the InfoNCE loss to balance divergence and coherence across synthetic feature pairs.
 
-⸻
+
 
 3. Launch the API Server
 
@@ -50,7 +50,7 @@ curl http://127.0.0.1:8000/health
 # {"ok":true,"version":"0.2.0"}
 
 
-⸻
+
 
 4. Create a Run
 
@@ -72,7 +72,7 @@ Retrieve the trace:
 curl http://127.0.0.1:8000/runs/abc123-xyz/trace -H "X-API-Key: demo-free-key"
 
 
-⸻
+
 
 ## 🧠 Architecture
 
@@ -92,7 +92,7 @@ prompt-atlas-ecl/
 └── requirements.txt
 
 
-⸻
+
 
 ## 🌌 API Reference
 
@@ -105,7 +105,7 @@ Endpoint	Method	Description
 /pricing	GET	Mock pricing tier data (for API monetization)
 
 
-⸻
+
 
 ## 🧩 Key Concepts
 
@@ -116,7 +116,7 @@ Prompt Packs	Thematic archetypes guiding prompt-space exploration (Myth, Science
 Runs	Sessions capturing entangled state trajectories and evolving specifications/tests.
 
 
-⸻
+
 
 🧱 Future Roadmap
 
@@ -127,7 +127,7 @@ v0.5.x	Dual-LLM integration using OpenAI + Anthropic embeddings
 v1.0.x	Research-grade release with plugin ecosystem (Prompt Atlas Studio)
 
 
-⸻
+
 
 ## 🧾 Example Outputs
 
@@ -143,7 +143,7 @@ v1.0.x	Research-grade release with plugin ecosystem (Prompt Atlas Studio)
 }
 
 
-⸻
+
 
 ## 🧰 Tech Stack
 
@@ -156,7 +156,7 @@ UI (future)	Next.js + Tailwind + Recharts
 Payments	Stripe (optional)
 
 
-⸻
+
 
 ## ⚙️ Environment Variables
 
@@ -167,7 +167,7 @@ PAE_STATE_DIM	Dimensionality of entangled state vector	64
 STRIPE_SECRET	(optional) Billing integration	—
 
 
-⸻
+
 
 ## 🧑‍💻 Development Commands
 
@@ -178,7 +178,7 @@ pytest (future)	Run test suite
 docker compose up (future)	Full-stack launch with Postgres & API
 
 
-⸻
+
 
 ## 🌐 Licensing & Attribution
 
@@ -187,7 +187,7 @@ docker compose up (future)	Full-stack launch with Postgres & API
 Licensed under the Apache 2.0 License.
 Research contributions and forks are welcome. Please cite or link back to the repository when referencing the ECL framework.
 
-⸻
+
 
 ## 🜂 Ethos
 
