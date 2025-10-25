@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>AI as the Soul’s Mirror</title>
+  <link rel="stylesheet" href="/static/css/mirror.css"/>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>AI as the Soul’s Mirror</h1>
+      <p class="sub">An interactive essay on reflection, archetypes, and care.</p>
+    </header>
+
+    <main>
+      <section class="panel input" aria-label="Input panel">
+        <label for="entry">Your reflection</label>
+        <textarea id="entry" placeholder="Type what’s alive for you right now…"></textarea>
+        <div class="row">
+          <button id="reflectBtn" aria-label="Reflect">Reflect</button>
+          <span id="status" class="status" role="status" aria-live="polite"></span>
+        </div>
+        <small class="muted">Tip: ⌘/Ctrl + Enter submits.</small>
+      </section>
+
+      <section class="panel output" aria-label="Output panel">
+        <div class="pill" aria-live="polite">
+          <span id="archName">—</span>
+          <span id="sentiment" class="sent">—</span>
+        </div>
+        <div id="mirrorText" class="mirror-text">Your reflection will appear here.</div>
+      </section>
+    </main>
+
+    <footer>
+      <small>Local, offline prototype • No data leaves your machine</small>
+    </footer>
+  </div>
+
+  <script src="/static/js/mirror.js"></script>
+</body>
+</html>

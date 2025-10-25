@@ -1,0 +1,22 @@
+:root{
+  --bg:#0b0d14; --panel:#111423; --text:#e5e7eb; --muted:#9ca3af; --accent:#38bdf8;
+}
+*{box-sizing:border-box} html,body{height:100%}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Inter,Roboto,sans-serif;color:var(--text);
+  background:radial-gradient(1200px 600px at 80% -10%, #172033 20%, transparent 60%), var(--bg);}
+.container{max-width:1100px;margin:0 auto;padding:28px 18px}
+header{margin-bottom:14px}
+h1{margin:0 0 6px;letter-spacing:.3px} .sub{margin:0;color:var(--muted)}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+nav button{background:#0e1324;border:1px solid #222a40;color:var(--text);padding:8px 12px;border-radius:10px;cursor:pointer}
+nav button:hover{border-color:#334166}
+.panel{background:var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px;margin-bottom:14px;
+  box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.grid{display:grid;gap:10px;grid-template-columns:repeat(3,minmax(0,1fr));margin:10px 0}
+label{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:14px;color:var(--muted)}
+input[type=range],input[type=number],input[type=text]{flex:1;background:#0e1324;color:var(--text);border:1px solid #233; border-radius:8px;padding:6px 8px}
+button{background:var(--accent);border:none;color:#081018;font-weight:700;padding:9px 14px;border-radius:10px;cursor:pointer}
+canvas{background:#0b0f1e;border:1px solid #1e2740;border-radius:12px;margin-top:10px;width:100%;height:auto}
+.tab{display:none} .tab.active{display:block}
+.md{white-space:pre-wrap}
+footer{margin-top:14px;color:var(--muted)}

@@ -1,0 +1,131 @@
+{
+  "archetypes": [
+    {
+      "id": "wanderer",
+      "name": "The Wanderer",
+      "color": "#4F46E5",
+      "keywords": [
+        "lost",
+        "search",
+        "journey",
+        "path",
+        "quest",
+        "wilderness",
+        "migrate",
+        "roam"
+      ],
+      "affirmation": "Lostness is not failure; it’s the compass of transformation."
+    },
+    {
+      "id": "healer",
+      "name": "The Healer",
+      "color": "#10B981",
+      "keywords": [
+        "heal",
+        "mend",
+        "care",
+        "restore",
+        "tend",
+        "soothe",
+        "compassion",
+        "recover"
+      ],
+      "affirmation": "Care is a technology of repair; begin with what is near."
+    },
+    {
+      "id": "sage",
+      "name": "The Sage",
+      "color": "#F59E0B",
+      "keywords": [
+        "truth",
+        "see",
+        "understand",
+        "learn",
+        "listen",
+        "observe",
+        "wisdom",
+        "clarity"
+      ],
+      "affirmation": "Clarity grows where attention stays."
+    },
+    {
+      "id": "warrior",
+      "name": "The Warrior",
+      "color": "#EF4444",
+      "keywords": [
+        "fight",
+        "resist",
+        "protect",
+        "defend",
+        "stand",
+        "courage",
+        "strength",
+        "boundaries"
+      ],
+      "affirmation": "Courage is stewardship of your values under pressure."
+    },
+    {
+      "id": "creator",
+      "name": "The Creator",
+      "color": "#8B5CF6",
+      "keywords": [
+        "make",
+        "create",
+        "build",
+        "compose",
+        "design",
+        "craft",
+        "imagine",
+        "invent"
+      ],
+      "affirmation": "What you make remakes you; iterate with care."
+    },
+    {
+      "id": "lover",
+      "name": "The Lover",
+      "color": "#EC4899",
+      "keywords": [
+        "love",
+        "belong",
+        "tender",
+        "intimacy",
+        "hold",
+        "grief",
+        "yearn",
+        "bond"
+      ],
+      "affirmation": "Attachment teaches us where our meanings live."
+    }
+  ],
+  "sentiment": {
+    "positive": [
+      "hope",
+      "grateful",
+      "calm",
+      "ready",
+      "curious",
+      "strong",
+      "patient",
+      "joy"
+    ],
+    "negative": [
+      "tired",
+      "afraid",
+      "anxious",
+      "stuck",
+      "sad",
+      "angry",
+      "lonely",
+      "burnout"
+    ],
+    "neutral": [
+      "consider",
+      "think",
+      "note",
+      "observe",
+      "reflect",
+      "process",
+      "analyze"
+    ]
+  }
+}

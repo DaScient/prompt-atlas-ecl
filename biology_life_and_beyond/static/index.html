@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Biology, Life, and Beyond — Interactive</title>
+  <link rel="stylesheet" href="/static/css/styles.css"/>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Biology, Life, and Beyond</h1>
+      <p class="sub">A micro‑exhibit on AI‑guided life design • offline‑first</p>
+      <nav>
+        <button data-tab="essay">Essay</button>
+        <button data-tab="lv">Ecosystem</button>
+        <button data-tab="evo">Evolution</button>
+        <button data-tab="coral">Symbiosis</button>
+        <button data-tab="pand">Pandemic</button>
+        <button data-tab="prompts">Prompts</button>
+      </nav>
+    </header>
+
+    <section id="tab-essay" class="tab">
+      <article id="essay" class="md"></article>
+    </section>
+
+    <section id="tab-lv" class="tab">
+      <div class="panel">
+        <h2>Ecosystem — Lotka–Volterra</h2>
+        <div class="grid">
+          <label>Prey growth α <input id="alpha" type="range" min="0.1" max="2.0" step="0.05" value="1.0"></label>
+          <label>Predation β <input id="beta" type="range" min="0.01" max="0.4" step="0.01" value="0.1"></label>
+          <label>Pred. decay γ <input id="gamma" type="range" min="0.1" max="3.0" step="0.1" value="1.5"></label>
+          <label>Pred. repr δ <input id="delta" type="range" min="0.01" max="0.2" step="0.005" value="0.075"></label>
+          <label>Shock time t* <input id="shock_t" type="number" min="-1" max="50" step="1" value="-1"></label>
+          <label>Shock scale <input id="shock_scale" type="number" min="0" max="10" step="0.5" value="1"></label>
+        </div>
+        <button id="runLV">Run</button>
+        <canvas id="lvPlot" width="900" height="320"></canvas>
+      </div>
+    </section>
+
+    <section id="tab-evo" class="tab">
+      <div class="panel">
+        <h2>Evolutionary Design (Toy GA)</h2>
+        <div class="grid">
+          <label>Population <input id="pop" type="number" min="8" max="256" step="8" value="64"></label>
+          <label>Length <input id="length" type="number" min="6" max="32" step="1" value="12"></label>
+          <label>Generations <input id="gens" type="number" min="10" max="200" step="5" value="60"></label>
+          <label>Target motif <input id="target" type="text" value="GATTACA"></label>
+        </div>
+        <button id="runEvo">Evolve</button>
+        <canvas id="evoPlot" width="900" height="320"></canvas>
+      </div>
+    </section>
+
+    <section id="tab-coral" class="tab">
+      <div class="panel">
+        <h2>Symbiosis — Coral Whisperer</h2>
+        <div class="grid">
+          <label>Heat start t* <input id="heat_t" type="number" min="0" max="100" step="1" value="30"></label>
+          <label>Heat amplitude <input id="heat_amp" type="number" min="0" max="2" step="0.1" value="0.7"></label>
+          <label>Symbiosis strength <input id="symb" type="number" min="0" max="1" step="0.05" value="0.5"></label>
+        </div>
+        <button id="runCoral">Simulate</button>
+        <canvas id="coralPlot" width="900" height="320"></canvas>
+      </div>
+    </section>
+
+    <section id="tab-pand" class="tab">
+      <div class="panel">
+        <h2>Pandemic Mutation Risk (Toy)</h2>
+        <div class="grid">
+          <label>R₀ <input id="R0" type="number" min="0.5" max="3.0" step="0.05" value="1.2"></label>
+          <label>Mutation prob <input id="mut_prob" type="number" min="0" max="0.2" step="0.005" value="0.02"></label>
+          <label>Variant boost <input id="vboost" type="number" min="0" max="1" step="0.05" value="0.3"></label>
+        </div>
+        <button id="runPand">Forecast</button>
+        <canvas id="pandPlot" width="900" height="320"></canvas>
+      </div>
+    </section>
+
+    <section id="tab-prompts" class="tab">
+      <article id="prompts" class="md"></article>
+    </section>
+
+    <footer>
+      <small>Local prototype • No data leaves your machine.</small>
+    </footer>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
