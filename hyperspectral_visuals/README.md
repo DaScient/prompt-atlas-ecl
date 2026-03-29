@@ -85,7 +85,3 @@ If this work contributes to your research or presentation, please cite:
 
 Don D.M. Tadaya (2025). Prompt Atlas — Hyperspectral Visuals: Interactive Performance Framework for Entropic Manifold Analysis.
 DaScient / ArchCore Research Laboratory.
-
-
-
-Would you like me to generate a companion banner image (e.g., a minimalist spectral gradient with the Prompt Atlas wordmark) for the top of this README to make it publication-ready on GitHub?
