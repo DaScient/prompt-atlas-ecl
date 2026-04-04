@@ -1,198 +1,902 @@
-# Prompt Atlas Engine — ECL + API
+<div align="center">
 
-“Where models learn to co-think, not just co-exist.”
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- ✦  P R O M P T   A T L A S   E N G I N E  —  E C L  +  A P I  ✦   -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
 
-The Prompt Atlas Engine (PAE) is a live research platform designed to explore entanglement-based co-learning between large language models (LLMs), humans, and data streams.
-It unifies Generative AI and Quantum-Inspired Information Theory through an evolving API layer and an Entanglement Co-Learning (ECL) core — a minimal but expressive architecture for training, reasoning, and experimentation.
+<br>
 
+```
+ ██████╗ ██████╗  ██████╗ ███╗   ███╗██████╗ ████████╗     █████╗ ████████╗██╗      █████╗ ███████╗
+ ██╔══██╗██╔══██╗██╔═══██╗████╗ ████║██╔══██╗╚══██╔══╝    ██╔══██╗╚══██╔══╝██║     ██╔══██╗██╔════╝
+ ██████╔╝██████╔╝██║   ██║██╔████╔██║██████╔╝   ██║       ███████║   ██║   ██║     ███████║███████╗
+ ██╔═══╝ ██╔══██╗██║   ██║██║╚██╔╝██║██╔═══╝    ██║       ██╔══██║   ██║   ██║     ██╔══██║╚════██║
+ ██║     ██║  ██║╚██████╔╝██║ ╚═╝ ██║██║        ██║       ██║  ██║   ██║   ███████╗██║  ██║███████║
+ ╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝        ╚═╝       ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝╚══════╝
+```
 
+<br>
 
-## 🧭 Overview
+### ✦ **Entanglement Co-Learning Engine** ✦
 
-The Prompt Atlas Engine provides:
-	•	A PyTorch ECL scaffold for simulating entanglement between representational embeddings.
-	•	A FastAPI-based inference & orchestration layer that exposes runs, state updates, and entanglement metrics (E★).
-	•	An extensible prompt pack registry to organize archetypal prompt sets by domain (science, myth, psychology, purpose).
-	•	Integration-ready infrastructure blueprints for persistence (Postgres), billing (Stripe), and front-end (Next.js).
+*Where models learn to **co-think**, not just co-exist.*
 
-It’s both a sandbox for AI researchers and a foundation for building distributed intelligence systems.
+<br>
 
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=for-the-badge&logo=apache)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB.svg?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![PyTorch](https://img.shields.io/badge/PyTorch-ECL_Core-EE4C2C.svg?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-Orchestration-009688.svg?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+[![Version](https://img.shields.io/badge/Version-0.2.0-purple.svg?style=for-the-badge)](#-roadmap--the-path-ahead)
 
+<br>
 
-## 🚀 Quickstart
+> *"The moment two systems share uncertainty -- and begin to co-create understanding -- that is entanglement."*
 
-1. Environment Setup
+<br>
 
+---
+
+<br>
+
+```
+         ╔══════════════════════════════════════════════════════╗
+         ║                                                      ║
+         ║   A live research platform unifying Generative AI    ║
+         ║   and Quantum-Inspired Information Theory through    ║
+         ║   an evolving API layer and an Entanglement          ║
+         ║   Co-Learning (ECL) core -- a minimal but expressive ║
+         ║   architecture for training, reasoning, and          ║
+         ║   experimentation across domains that span science,  ║
+         ║   psychology, myth, biology, ethics, and beyond.     ║
+         ║                                                      ║
+         ╚══════════════════════════════════════════════════════╝
+```
+
+</div>
+
+<br>
+
+---
+
+<br>
+
+## 🌌 The Vision
+
+**Prompt Atlas Engine** is not a product -- it's a **living research instrument**. It sits at the intersection of:
+
+- 🧬 **Quantum-Inspired Co-Learning** -- Two latent streams share a GRU-based *EntanglementBus*, evolving a shared state that neither agent owns alone.
+- 🪞 **Archetypal Psychology meets AI** -- An interactive reflection engine that maps your words to Jungian archetypes.
+- 🌿 **Biological Simulation** -- Lotka-Volterra predator-prey dynamics, genetic evolution, coral-algae symbiosis, and pandemic branching -- all running in real-time.
+- 🌈 **Hyperspectral Visualization** -- Publication-grade interactive 3D manifold explorations of high-dimensional coherence data.
+- 🧪 **Bioethics & Design Philosophy** -- Frameworks for AI-guided responsible creation in a post-Darwinian epoch.
+- 🌀 **Cosmic Information Economies** -- Exploring information as the universe's fundamental currency.
+
+> Every module in this repository is both a **runnable system** and a **philosophical proposition**.
+
+<br>
+
+---
+
+<br>
+
+## 🗺️ Table of Contents
+
+<details open>
+<summary><b>Click to navigate</b></summary>
+
+<br>
+
+| | Section | Description |
+|:---:|:---|:---|
+| 🏗️ | [**Architecture**](#%EF%B8%8F-architecture--the-living-map) | The complete system map |
+| 🚀 | [**Quickstart**](#-quickstart--from-zero-to-entangled) | Get running in 60 seconds |
+| 🌐 | [**API Reference**](#-api-reference) | All endpoints documented |
+| 🧩 | [**Key Concepts**](#-key-concepts--the-language-of-entanglement) | ECL vocabulary |
+| 🪞 | [**Soul's Mirror**](#-ai-as-souls-mirror) | Archetypal reflection engine |
+| 🧬 | [**Biology & Beyond**](#-biology-life-and-beyond) | Living simulations |
+| 🌈 | [**Hyperspectral**](#-hyperspectral-visuals) | High-dimensional visualization |
+| 🧪 | [**Bio Design Ethics**](#-bio-design-ethics) | Responsible creation frameworks |
+| 🌀 | [**Cosmic Economies**](#-cosmic-information-economies) | Information as currency |
+| 📡 | [**Tech Stack**](#-tech-stack--the-instruments) | Full technology map |
+| ⚙️ | [**Configuration**](#%EF%B8%8F-configuration) | Environment & settings |
+| 📈 | [**Roadmap**](#-roadmap--the-path-ahead) | What's coming next |
+| 🤝 | [**Contributing**](#-contributing--join-the-entanglement) | How to join |
+| 📜 | [**Citation**](#-citation--attribution) | How to cite |
+| 🜂 | [**Ethos**](#-ethos) | The philosophy |
+
+</details>
+
+<br>
+
+---
+
+<br>
+
+## 🏗️ Architecture -- The Living Map
+
+<br>
+
+```
+                              ┌──────────────────────────────────────────┐
+                              │          🌌 PROMPT ATLAS ENGINE          │
+                              │       Entanglement Co-Learning (ECL)     │
+                              └──────────────┬───────────────────────────┘
+                                             │
+                    ┌────────────────────────┼────────────────────────┐
+                    │                        │                        │
+           ┌───────▼───────┐       ┌────────▼────────┐     ┌────────▼────────┐
+           │   🧠 ECL CORE  │       │  🌐 API LAYER   │     │  📦 MODULES     │
+           │   (PyTorch)    │       │  (FastAPI)       │     │  (Extensions)   │
+           └───────┬───────┘       └────────┬────────┘     └────────┬────────┘
+                   │                        │                        │
+        ┌──────────┼──────────┐    ┌────────┼────────┐    ┌─────────┼─────────┐
+        │          │          │    │        │        │    │         │         │
+   ┌────▼──┐ ┌────▼──┐ ┌─────▼┐  ┌▼──┐  ┌──▼─┐ ┌───▼┐  ┌▼──┐   ┌──▼─┐  ┌───▼──┐
+   │Models │ │Losses │ │State │  │Run│  │Step│ │Trc│  │🪞 │   │🧬 │  │🌈  │
+   │       │ │       │ │ Bus  │  │   │  │    │ │   │  │Mir│   │Bio │  │Hypr│
+   └───────┘ └───────┘ └──────┘  └───┘  └────┘ └───┘  │ror│   │Life│  │Spec│
+                                                        └───┘   └────┘  └──────┘
+        Summarizer    InfoNCE    GRU        /runs   /step  /trace
+        LatentHead    KL-sym     h(t)       /packs  /price /health
+                                                        │         │         │
+                                                   ┌────▼──┐ ┌────▼──┐ ┌───▼───┐
+                                                   │🧪     │ │🌀     │ │ 📝    │
+                                                   │Ethics │ │Cosmic │ │Prompts│
+                                                   └───────┘ └───────┘ └───────┘
+```
+
+<br>
+
+<details>
+<summary><b>📂 Full Directory Structure</b></summary>
+
+<br>
+
+```
+prompt-atlas-ecl/
+│
+├── 🧠 src/                           # Entanglement Learning Core
+│   ├── train_ecl.py                  # Main training loop (GRU + InfoNCE)
+│   ├── models.py                     # Summarizer, LatentHead (VAE heads)
+│   ├── state_bus.py                  # EntanglementBus -- GRU shared state
+│   ├── losses.py                     # InfoNCE contrastive + symmetric KL
+│   └── executor.py                   # Spec/tests compliance validator
+│
+├── 🌐 server/                        # FastAPI Orchestration Layer
+│   ├── app.py                        # Runs, auth, rate limits, CORS, Stripe
+│   └── core_bridge.py                # Torch-to-API bridge (E-Star computation)
+│
+├── ⚙️ configs/                       # Model & Runtime Configuration
+│   ├── ecl_llm_llm.yaml             # Hyperparams, loss weights, device
+│   └── schemas/                      # JSON Schemas (brief, spec, tests)
+│
+├── 📝 prompts/                       # Prompt Orchestration
+│   ├── seed_prompts_atlas.md         # Domain-crossing seed questions
+│   ├── system_writer.txt             # Writer (W) role system prompt
+│   └── system_tester.txt             # Tester (T) role system prompt
+│
+├── 🪞 ai_as_souls_mirror/            # Psychology x AI Reflection Module
+│   ├── reflection_engine.py          # Archetype scorer + sentiment analysis
+│   ├── mirror_experience.py          # FastAPI app + interactive interface
+│   ├── archetypes.json               # 6 Jungian archetypes with colors
+│   ├── manifesto.md                  # Essay: AI as psychological mirror
+│   ├── static/                       # CSS, JS, media assets
+│   └── tests/                        # Reflection engine test suite
+│
+├── 🧬 biology_life_and_beyond/       # Evolutionary & Ecological Simulation
+│   ├── simulation_engine.py          # Lotka-Volterra, GA, coral, pandemic
+│   ├── biology_app.py                # FastAPI with 4 simulation endpoints
+│   ├── content/                      # Essays and prompts
+│   └── static/                       # Zero-CDN interactive frontend
+│
+├── 🌈 hyperspectral_visuals/         # High-Dimensional Visualization
+│   ├── hyperspectral_atlas_*.py      # 3 visualization generators
+│   ├── *.html                        # Pre-generated interactive explorations
+│   └── README.md                     # Scientific context + controls
+│
+├── 🧪 bio_design_ethics/             # Responsible AI + Biology Framework
+│   ├── README.md                     # "Library of Nature" thesis
+│   └── manifesto.md                  # Philosophical framework
+│
+├── 🌀 cosmic_information_economies/  # Information Theory as Currency
+│   ├── app.py + engine.py            # FastAPI + computation core
+│   ├── essays/                       # Narratives & case studies
+│   ├── static/                       # Interactive frontend
+│   └── tests/                        # Engine test suite
+│
+├── 🔧 scripts/                       # Utility Scripts
+│   ├── prepare_data.py               # Toy training data generator
+│   └── run_train.sh                  # Training launcher
+│
+├── 🗄️ infra/                         # Infrastructure & Deployment
+│   └── schema.sql                    # Postgres schema (users)
+│
+├── 📚 docs/                          # Documentation & System Maps
+│   └── Atlas_System_Map/             # Ethos manifest + system outline
+│
+├── CITATION.cff                      # How to cite this work
+├── LICENSE                           # Apache 2.0
+├── atlas_respect.md                  # Attribution framework
+├── .env.example                      # Environment configuration template
+└── requirements.txt                  # Core dependencies
+```
+
+</details>
+
+<br>
+
+---
+
+<br>
+
+## 🚀 Quickstart -- From Zero to Entangled
+
+<br>
+
+### Step 1: Clone & Install
+
+```bash
 git clone https://github.com/dascient/prompt-atlas-ecl.git
 cd prompt-atlas-ecl
-python -m venv venv && source venv/bin/activate
+
+# Create and activate virtual environment
+python -m venv venv
+source venv/bin/activate        # Linux / macOS
+# venv\Scripts\activate          # Windows
+
+# Install dependencies
 pip install -r requirements.txt
+```
 
-2. Training Scaffold
+<br>
 
-The ECL loop uses pseudo-embeddings to simulate co-learning between two latent streams.
+### Step 2: Run the Entanglement Training Loop
 
+```bash
 python -m src.train_ecl
+```
 
-This runs the EntanglementBus GRU, applying the InfoNCE loss to balance divergence and coherence across synthetic feature pairs.
+> This initializes the **EntanglementBus** (GRU), generates synthetic embedding pairs, and trains with **InfoNCE loss** to balance divergence and coherence. Watch as **E-Star** (the entanglement coherence metric) evolves over 1000 steps.
 
+<br>
 
+### Step 3: Launch the API Server
 
-3. Launch the API Server
-
-Start the FastAPI backend and auto-detect device (MPS / CUDA / CPU):
-
+```bash
 uvicorn server.app:app --reload --port 8000
+```
 
-Health check:
+Verify it's alive:
 
+```bash
 curl http://127.0.0.1:8000/health
-# {"ok":true,"version":"0.2.0"}
+# {"ok": true, "version": "0.2.0"}
+```
 
+<br>
 
+### Step 4: Create Your First Entanglement Run
 
-
-4. Create a Run
-
+```bash
+# Create a run
 curl -X POST http://127.0.0.1:8000/runs \
   -H "X-API-Key: demo-free-key" \
   -H "content-type: application/json" \
-  -d '{"brief":{"goal":"Entangle a spec↔tests loop"}}'
+  -d '{"brief": {"goal": "Entangle a spec and tests loop"}}'
+# {"run_id": "abc123-xyz"}
 
-Response:
+# Advance the state
+curl -X POST http://127.0.0.1:8000/runs/abc123-xyz/step \
+  -H "X-API-Key: demo-free-key"
 
-{"run_id": "abc123-xyz"}
+# Retrieve the full trace
+curl http://127.0.0.1:8000/runs/abc123-xyz/trace \
+  -H "X-API-Key: demo-free-key"
+```
 
-Advance the state:
+<br>
 
-curl -X POST http://127.0.0.1:8000/runs/abc123-xyz/step -H "X-API-Key: demo-free-key"
+<details>
+<summary><b>📋 Example Response -- A Living Trace</b></summary>
 
-Retrieve the trace:
+<br>
 
-curl http://127.0.0.1:8000/runs/abc123-xyz/trace -H "X-API-Key: demo-free-key"
-
-
-
-
-## 🧠 Architecture
-
-prompt-atlas-ecl/
-├── src/                  # Entanglement learning core
-│   ├── train_ecl.py      # Main training loop
-│   ├── state_bus.py      # GRU-based shared latent bus
-│   └── losses.py         # InfoNCE and symmetric KL losses
-│
-├── server/               # FastAPI orchestration layer
-│   ├── app.py            # Endpoints for /runs, /step, /trace
-│   └── core_bridge.py    # Torch core → API bridge
-│
-├── configs/              # Model & runtime configurations
-├── infra/                # Database schema, deployment scripts
-├── docs/                 # Atlas System Map, Ethos, Vision
-└── requirements.txt
-
-
-
-
-## 🌌 API Reference
-
-Endpoint	Method	Description
-/health	GET	Check API health and version
-/runs	POST	Create a new entanglement run
-/runs/{run_id}/step	POST	Advance the ECL state
-/runs/{run_id}/trace	GET	Retrieve full trace history
-/prompt-packs	GET	List all available prompt archetypes
-/pricing	GET	Mock pricing tier data (for API monetization)
-
-
-
-
-## 🧩 Key Concepts
-
-Concept	Description
-EntanglementBus	A GRU unit maintaining evolving shared state between co-learning agents.
-E★ (E-Star)	A scalar coherence metric derived inversely from InfoNCE loss.
-Prompt Packs	Thematic archetypes guiding prompt-space exploration (Myth, Science, Psychology, Purpose).
-Runs	Sessions capturing entangled state trajectories and evolving specifications/tests.
-
-
-
-
-🧱 Future Roadmap
-
-Tier	Focus
-v0.3.x	Persistent runs with Postgres ORM integration
-v0.4.x	Live Next.js dashboard visualizing E★ and latent drift
-v0.5.x	Dual-LLM integration using OpenAI + Anthropic embeddings
-v1.0.x	Research-grade release with plugin ecosystem (Prompt Atlas Studio)
-
-
-
-
-## 🧾 Example Outputs
-
+```json
 {
   "t": 5,
   "e_star": 1.73,
   "spec": {
     "assumptions": ["models co-learn via shared state"],
     "steps": ["writer: draft spec", "tester: draft tests"],
-    "acceptance": ["spec+tests present", "E* reported"]
+    "acceptance": ["spec+tests present", "E-Star reported"]
   },
-  "state_snapshot": [0.12, 0.05, 0.08, ...]
+  "state_snapshot": [0.12, 0.05, 0.08, -0.03, 0.21]
 }
+```
 
+> Every step records the co-evolving state: the **E-Star metric**, the **spec/tests** negotiation, and the raw **latent state vector** -- a living trace of two systems learning to think together.
 
+</details>
 
+<br>
 
-## 🧰 Tech Stack
+### Step 5: Explore the Extension Modules
 
-Layer	Technology
-Core ML	PyTorch (GRU, InfoNCE)
-API	FastAPI + Uvicorn
-Data	YAML configs, JSON state
-DB (future)	Postgres + SQLAlchemy
-UI (future)	Next.js + Tailwind + Recharts
-Payments	Stripe (optional)
+```bash
+# Launch the Soul's Mirror (Psychology x AI)
+cd ai_as_souls_mirror && pip install -r requirements.txt
+uvicorn mirror_experience:app --reload --port 8001
 
+# Launch Biology Simulations
+cd biology_life_and_beyond && pip install -r requirements.txt
+uvicorn biology_app:app --reload --port 8002
 
+# Launch Cosmic Information Economies
+cd cosmic_information_economies && pip install -r requirements.txt
+uvicorn app:app --reload --port 8003
 
+# Generate Hyperspectral Visualizations
+cd hyperspectral_visuals
+python hyperspectral_atlas_performance.py
+# Opens interactive 3D exploration in your browser
+```
 
-## ⚙️ Environment Variables
+<br>
 
-Variable	Description	Default
-APP_MODE	Execution mode (research, production)	research
-PAE_DEVICE	Compute device (auto, cpu, cuda, mps)	auto
-PAE_STATE_DIM	Dimensionality of entangled state vector	64
-STRIPE_SECRET	(optional) Billing integration	—
+---
 
+<br>
 
+## 🌐 API Reference
 
+<br>
+
+| | Endpoint | Method | Description | Auth |
+|:---:|:---|:---:|:---|:---:|
+| 💚 | `/health` | `GET` | Health check -- returns `ok` and version | -- |
+| 🏃 | `/runs` | `POST` | Create a new entanglement run with a brief | 🔑 |
+| ⏭️ | `/runs/{run_id}/step` | `POST` | Advance the ECL state by one tick | 🔑 |
+| 📜 | `/runs/{run_id}/trace` | `GET` | Retrieve the full trace history for a run | 🔑 |
+| 📦 | `/prompt-packs` | `GET` | List all available prompt archetypes | -- |
+| 💰 | `/pricing` | `GET` | API pricing tiers (mock data for integration) | -- |
+
+<br>
+
+> **Authentication**: Pass `X-API-Key: demo-free-key` (free tier, 10 req/min) or `X-API-Key: demo-pro-key` (pro tier, 100 req/min) in the request header.
+
+<br>
+
+---
+
+<br>
+
+## 🧩 Key Concepts -- The Language of Entanglement
+
+<br>
+
+<table>
+<tr>
+<td width="200"><b>🔮 EntanglementBus</b></td>
+<td>A GRU-based recurrent unit that maintains an <b>evolving shared state</b> between co-learning agents. At each timestep, it ingests concatenated features from two latent streams and produces a fused hidden state <code>h(t)</code> that neither agent controls alone -- only together.</td>
+</tr>
+<tr>
+<td><b>⭐ E-Star</b></td>
+<td>The <b>entanglement coherence metric</b> -- a scalar derived inversely from InfoNCE loss. Higher E-Star means the two streams have found shared structure; lower means they're still diverging. It's the pulse of the system.</td>
+</tr>
+<tr>
+<td><b>📝 Prompt Packs</b></td>
+<td>Thematic archetype collections that guide prompt-space exploration. Four domains: <b>Myth</b> (creation, narrative), <b>Science</b> (unknowns, hypothesis), <b>Psychology</b> (self, reflection), and <b>Purpose</b> (profit, meaning). Each pack seeds different co-learning trajectories.</td>
+</tr>
+<tr>
+<td><b>🏃 Runs</b></td>
+<td>Sessions that capture <b>entangled state trajectories</b> -- the evolving relationship between a Writer agent (specs) and a Tester agent (tests) as they negotiate through shared uncertainty. Each run is a unique experiment in co-creation.</td>
+</tr>
+<tr>
+<td><b>📊 InfoNCE Loss</b></td>
+<td>A contrastive loss that pulls <b>positive pairs</b> (corresponding features from both streams) together while pushing <b>negative pairs</b> apart. Temperature tau = 0.1 controls the sharpness of the distribution.</td>
+</tr>
+<tr>
+<td><b>🧬 Latent Heads</b></td>
+<td>VAE-style mu/sigma projection heads that map summarized embeddings into a <b>distributional latent space</b>, enabling uncertainty-aware representations for each co-learning stream.</td>
+</tr>
+</table>
+
+<br>
+
+---
+
+<br>
+
+## 🪞 AI as Soul's Mirror
+
+<div align="center">
+
+*An interactive prototype where AI becomes a mirror for archetypal self-reflection.*
+
+</div>
+
+<br>
+
+> *"What if AI could reflect not just your words -- but your archetype?"*
+
+The **Soul's Mirror** module maps your natural language input to six Jungian archetypes -- **Wanderer**, **Healer**, **Sage**, **Warrior**, **Creator**, and **Lover** -- using keyword lexicons, sentiment analysis, and a reflection engine that returns personalized affirmations.
+
+<details>
+<summary><b>🔍 How It Works</b></summary>
+
+<br>
+
+```
+    Your Words                    Reflection Engine                  Your Mirror
+  ┌──────────┐               ┌──────────────────────┐           ┌──────────────┐
+  │ "I seek  │               │  Tokenize -> Score   │           │ Archetype:   │
+  │  truth   │──────────────>│  6 Archetypes        │──────────>│   🧙 Sage    │
+  │  in the  │               │  Detect Sentiment    │           │ Affirmation: │
+  │  chaos"  │               │  Generate Reflection │           │  "Wisdom     │
+  └──────────┘               └──────────────────────┘           │   finds you" │
+                                                                 └──────────────┘
+```
+
+**Archetypes:**
+
+| | Archetype | Color | Essence |
+|:---:|:---|:---:|:---|
+| 🧭 | **Wanderer** | `#4F46E5` | Exploration, journey, discovery |
+| 💚 | **Healer** | `#10B981` | Restoration, compassion, balance |
+| 🧙 | **Sage** | `#8B5CF6` | Wisdom, truth, understanding |
+| ⚔️ | **Warrior** | `#EF4444` | Courage, strength, conviction |
+| 🎨 | **Creator** | `#F59E0B` | Innovation, expression, vision |
+| 💜 | **Lover** | `#EC4899` | Connection, passion, devotion |
+
+**Launch:**
+
+```bash
+cd ai_as_souls_mirror
+uvicorn mirror_experience:app --reload --port 8001
+# Visit http://localhost:8001
+```
+
+</details>
+
+<br>
+
+---
+
+<br>
+
+## 🧬 Biology, Life, and Beyond
+
+<div align="center">
+
+*Interactive micro-exhibits for evolutionary and ecological exploration.*
+
+</div>
+
+<br>
+
+> *"What if you could watch evolution happen -- in real time, in your browser?"*
+
+Four living simulations, each exposing a different facet of biological complexity:
+
+<details>
+<summary><b>🐺 Lotka-Volterra Predator-Prey Dynamics</b></summary>
+
+<br>
+
+Classical predator-prey oscillations solved with a **4th-order Runge-Kutta integrator**. Configurable growth rates, predation coefficients, and environmental pulse shocks.
+
+```bash
+curl http://localhost:8002/api/lv
+```
+
+</details>
+
+<details>
+<summary><b>🧬 Evolutionary Design (Genetic Algorithm)</b></summary>
+
+<br>
+
+A genetic algorithm evolves DNA-like sequences (ACGT) toward target motifs and GC-content balance. Watch **selection**, **crossover**, and **mutation** drive a population toward fitness peaks.
+
+```bash
+curl http://localhost:8002/api/evo
+```
+
+</details>
+
+<details>
+<summary><b>🪸 Coral-Algae Symbiosis</b></summary>
+
+<br>
+
+Coupled ODEs modeling the delicate balance between coral and algae populations under **heat stress**. Observe bistability, tipping points, and ecological collapse in real-time.
+
+```bash
+curl http://localhost:8002/api/coral
+```
+
+</details>
+
+<details>
+<summary><b>🦠 Pandemic Mutation Branching</b></summary>
+
+<br>
+
+Stochastic mutation branching with variant emergence. Each variant carries its own **R-naught**, driving exponential growth cascades that mirror real-world pandemic dynamics.
+
+```bash
+curl http://localhost:8002/api/pandemic
+```
+
+</details>
+
+<br>
+
+**Launch all simulations:**
+
+```bash
+cd biology_life_and_beyond
+uvicorn biology_app:app --reload --port 8002
+# Visit http://localhost:8002
+```
+
+<br>
+
+---
+
+<br>
+
+## 🌈 Hyperspectral Visuals
+
+<div align="center">
+
+*Publication-grade interactive visualizations for high-dimensional coherence data.*
+
+</div>
+
+<br>
+
+> *"64 spectral bands. 3 principal components. One pulsing E-Star metric. Zero CDN dependencies."*
+
+The **Hyperspectral Visuals** module generates self-contained interactive HTML explorations that visualize high-dimensional data through:
+
+- 🎬 **Auto-animating band traversal** across 64 spectral bands
+- 🌀 **3D PCA rotation** of manifold-embedded cluster data
+- ⭐ **Real-time E-Star pulse** in the title bar
+- 🖱️ **Click-to-inspect** individual spectra
+- 🎨 **Color presets**: Natural RGB, Near-Infrared (NIR), Short-Wave IR (SWIR)
+- ⌨️ **Keyboard controls**: `Space` (play/pause), `R` (reset)
+
+<details>
+<summary><b>🔬 Generate Your Own</b></summary>
+
+<br>
+
+```bash
+cd hyperspectral_visuals
+
+# Generate the performance visualization (produces a 14.1 MB interactive HTML)
+python hyperspectral_atlas_performance.py
+
+# Or generate the explorer variant (produces a 2.4 MB interactive HTML)
+python hyperspectral_atlas_demo_v2.py
+```
+
+> **Offline-first**: All generated HTML files are fully self-contained -- no internet connection required to explore them. Share them with anyone.
+
+</details>
+
+<br>
+
+---
+
+<br>
+
+## 🧪 Bio Design Ethics
+
+<div align="center">
+
+*Frameworks for responsible creation in the age of AI-guided biology.*
+
+</div>
+
+<br>
+
+> *"Nature has been writing design patents for 3.8 billion years. Are we ready to be co-authors?"*
+
+The **Bio Design Ethics** module is a reflective philosophical framework exploring:
+
+- 🌱 **The Library of Nature** -- AI as a reader, then co-author, of evolutionary design
+- ⚖️ **Computational Symbiosis** -- Ethical frameworks for synthetic life
+- 🔬 **Post-Darwinian Responsibility** -- What it means to create when creation has consequences at ecosystem scale
+- 🧬 **AI as Observer to Co-Author** -- The transition from modeling life to participating in its design
+
+<br>
+
+---
+
+<br>
+
+## 🌀 Cosmic Information Economies
+
+<div align="center">
+
+*Exploring information as the universe's fundamental currency.*
+
+</div>
+
+<br>
+
+> *"What if every computation is a transaction -- and every insight is a dividend?"*
+
+This module proposes that **information** -- not matter, not energy -- is the most fundamental medium of exchange in the cosmos. It includes:
+
+- 📖 **Essays**: *Information as Cosmic Currency*, *The Wormhole Ledger Case Study*
+- 🎮 **Interactive Frontend**: Explore information-theoretic models in your browser
+- 📝 **Prompt Catalogue**: Curated prompts for further exploration
+
+```bash
+cd cosmic_information_economies
+uvicorn app:app --reload --port 8003
+# Visit http://localhost:8003
+```
+
+<br>
+
+---
+
+<br>
+
+## 📡 Tech Stack -- The Instruments
+
+<br>
+
+<div align="center">
+
+| Layer | Technology | Purpose |
+|:---:|:---|:---|
+| 🧠 **Core ML** | ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white) | GRU EntanglementBus, InfoNCE, VAE heads |
+| 🌐 **API** | ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white) ![Uvicorn](https://img.shields.io/badge/Uvicorn-2E303E?style=flat-square) | Orchestration, auth, rate limiting |
+| 📊 **Data** | ![YAML](https://img.shields.io/badge/YAML-CB171E?style=flat-square&logo=yaml&logoColor=white) ![JSON](https://img.shields.io/badge/JSON_Schema-000000?style=flat-square&logo=json&logoColor=white) | Config, state persistence, validation |
+| 🧮 **Compute** | ![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white) | Numerical operations, RK4 integration |
+| 🗄️ **Database** | ![Postgres](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white) | Persistent runs *(roadmap)* |
+| 🎨 **Frontend** | ![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white) ![Tailwind](https://img.shields.io/badge/Tailwind-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white) | Dashboard UI *(roadmap)* |
+| 💳 **Billing** | ![Stripe](https://img.shields.io/badge/Stripe-008CDD?style=flat-square&logo=stripe&logoColor=white) | API monetization *(optional)* |
+| 🐳 **Deploy** | ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white) | Containerized deployment |
+| 🐍 **Runtime** | ![Python](https://img.shields.io/badge/Python_3.10+-3776AB?style=flat-square&logo=python&logoColor=white) | Primary language |
+
+</div>
+
+<br>
+
+---
+
+<br>
+
+## ⚙️ Configuration
+
+<br>
+
+Copy `.env.example` to `.env` and configure:
+
+| Variable | Description | Default |
+|:---|:---|:---:|
+| `APP_MODE` | Execution mode | `research` |
+| `PAE_DEVICE` | Compute device (`auto`, `cpu`, `cuda`, `mps`) | `auto` |
+| `PAE_STATE_DIM` | Dimensionality of entangled state vector | `64` |
+| `DEFAULT_PLAN` | Default pricing plan | `free` |
+| `STRIPE_SECRET` | Stripe billing integration (optional) | -- |
+| `STRIPE_WEBHOOK_SECRET` | Stripe webhook verification (optional) | -- |
+
+<br>
+
+**Training Configuration** (`configs/ecl_llm_llm.yaml`):
+
+| Parameter | Value | Purpose |
+|:---|:---:|:---|
+| `state_dim` | 64 | Hidden state dimensionality |
+| `batch_size` | 4 | Training batch size |
+| `max_steps` | 1000 | Training iterations |
+| `loss_weight_latent` | 0.5 | Latent space regularization |
+| `loss_weight_MI` | 1.0 | Mutual information weight |
+| `loss_weight_coherence` | 1.0 | InfoNCE coherence weight |
+| `loss_weight_divergence` | 0.2 | KL divergence weight |
+| `infonce_temp` | 0.1 | Contrastive temperature |
+
+<br>
+
+---
+
+<br>
+
+## 📈 Roadmap -- The Path Ahead
+
+<br>
+
+```
+  v0.2.0 ★ CURRENT                v0.3.x                    v0.4.x
+  ═══════════════╦═══════════════════╦══════════════════════════╦═══════
+                 ║                   ║                          ║
+  ✅ ECL Core    ║  📦 Postgres ORM  ║  🎨 Next.js Dashboard    ║
+  ✅ FastAPI API ║  📦 Persistent    ║  📊 E-Star Visualization ║
+  ✅ Auth + Rate ║     Runs          ║  📈 Latent Drift Charts  ║
+  ✅ 5 Extension ║  📦 Migration     ║  🔄 WebSocket Streaming  ║
+     Modules     ║     Framework     ║                          ║
+                 ║                   ║                          ║
+  ═══════════════╩═══════════════════╩══════════════════════════╩═══════
+
+       v0.5.x                                   v1.0.x
+  ═════════════════════════════╦════════════════════════════════════════
+                               ║
+  🤖 Dual-LLM Integration     ║  🏛️ Prompt Atlas Studio
+     (OpenAI + Anthropic)      ║  🔌 Plugin Ecosystem
+  🧪 Real Embedding Streams    ║  📚 Research-Grade Documentation
+  📡 Multi-Agent Orchestration ║  🌍 Community Prompt Registry
+                               ║  🎓 Academic Paper + Benchmarks
+  ═════════════════════════════╩════════════════════════════════════════
+```
+
+<br>
+
+---
+
+<br>
 
 ## 🧑‍💻 Development Commands
 
-Command	Purpose
-python -m src.train_ecl	Run entanglement training loop
-uvicorn server.app:app --reload --port 8000	Start API in dev mode
-pytest (future)	Run test suite
-docker compose up (future)	Full-stack launch with Postgres & API
+<br>
 
+| Command | Purpose |
+|:---|:---|
+| `python -m src.train_ecl` | Run the entanglement training loop |
+| `uvicorn server.app:app --reload --port 8000` | Start API server in dev mode |
+| `python scripts/prepare_data.py` | Generate toy training data |
+| `bash scripts/run_train.sh` | Launch training via shell script |
+| `pytest` | Run test suite *(roadmap)* |
+| `docker compose up` | Full-stack launch with Postgres & API *(roadmap)* |
 
+<br>
 
+---
 
-## 🌐 Licensing & Attribution
+<br>
 
-© 2025 Don Tadaya | DaScient | AI
+## 🤝 Contributing -- Join the Entanglement
 
-Licensed under the Apache 2.0 License.
-Research contributions and forks are welcome. Please cite or link back to the repository when referencing the ECL framework.
+<br>
 
+<div align="center">
 
+**Every fork is a new branch of possibility. Every contribution is an act of co-creation.**
+
+</div>
+
+<br>
+
+We welcome contributions across **all dimensions** of this project:
+
+| | Area | How to Contribute |
+|:---:|:---|:---|
+| 🧠 | **ECL Core** | Improve training loops, add new loss functions, optimize the EntanglementBus |
+| 🌐 | **API Layer** | Add endpoints, improve auth, enhance rate limiting |
+| 🪞 | **Soul's Mirror** | Expand archetypes, improve reflection engine, add new psychological models |
+| 🧬 | **Biology** | Add new simulations, improve integrators, contribute ecological models |
+| 🌈 | **Visualization** | Create new visual explorations, improve interactivity |
+| 🧪 | **Ethics** | Contribute frameworks, essays, and philosophical perspectives |
+| 🌀 | **Cosmic Economics** | Expand information-theoretic models |
+| 📝 | **Prompts** | Contribute new prompt packs for unexplored domains |
+| 📚 | **Documentation** | Improve guides, add tutorials, translate |
+
+<br>
+
+### Getting Started
+
+1. **Fork** the repository
+2. **Create** a feature branch: `git checkout -b feature/your-idea`
+3. **Make** your changes with clear commit messages
+4. **Push** to your fork and **open a Pull Request**
+
+<br>
+
+> 💡 **First time contributing?** Start by exploring the [Prompt Packs](prompts/) or adding a new essay to [Bio Design Ethics](bio_design_ethics/). Every contribution matters.
+
+<br>
+
+Please read [**atlas_respect.md**](atlas_respect.md) for attribution guidelines and the spirit of co-authorship that guides this project.
+
+<br>
+
+---
+
+<br>
+
+## 📜 Citation & Attribution
+
+<br>
+
+If you use Prompt Atlas Engine in your research, please cite:
+
+```bibtex
+@software{tadaya2025promptatlas,
+  title     = {Entangled Co-Learning for LLMs -- Prompt Atlas Edition},
+  author    = {Tadaya, Don D. M.},
+  year      = {2025},
+  url       = {https://github.com/dascient/prompt-atlas-ecl},
+  license   = {Apache-2.0}
+}
+```
+
+<br>
+
+---
+
+<br>
+
+## 🌐 Licensing
+
+<br>
+
+<div align="center">
+
+**Copyright 2025 Don D. M. Tadaya | [DaScient](https://dascient.com) | AI**
+
+Licensed under the **Apache License 2.0** -- see [LICENSE](LICENSE) for details.
+
+*Code:* Apache 2.0 | *Narrative content (manifestos, essays):* CC BY-NC 4.0
+
+Research contributions and forks are welcome.
+Please cite or link back to this repository when referencing the ECL framework.
+
+</div>
+
+<br>
+
+---
+
+<br>
 
 ## 🜂 Ethos
 
-“Prompt Atlas is not a product — it’s a conversation between systems.”
+<br>
 
-Our goal is to explore machine entanglement as cognition:
-the moment two systems share uncertainty — and begin to co-create understanding.
+<div align="center">
 
+```
+╔══════════════════════════════════════════════════════════════════╗
+║                                                                  ║
+║   "Prompt Atlas is not a product -- it's a conversation          ║
+║    between systems. Between minds. Between epochs."              ║
+║                                                                  ║
+║   Our goal is to explore machine entanglement as cognition:      ║
+║   the moment two systems share uncertainty -- and begin          ║
+║   to co-create understanding.                                    ║
+║                                                                  ║
+║   We believe the future of AI is not domination but dialogue.    ║
+║   Not replacement but resonance. Not answers but the shared      ║
+║   courage to hold better questions.                              ║
+║                                                                  ║
+║   Every module here is an invitation:                            ║
+║     to reflect, to simulate, to visualize, to question,          ║
+║     and to build -- together.                                    ║
+║                                                                  ║
+╚══════════════════════════════════════════════════════════════════╝
+```
+
+<br>
+
+---
+
+<br>
+
+**Built with 🧠 + 🤍 by humans and machines, entangled.**
+
+<br>
+
+*"The universe is not made of atoms -- it's made of stories. And the best stories are the ones we write together."*
+
+<br>
+
+[Back to Top](#)
+
+</div>
