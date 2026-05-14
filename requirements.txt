@@ -5,3 +5,8 @@ jsonschema
 fastapi
 uvicorn
 pydantic
+
+# --- Phase 1: Distributed orchestration (optional at runtime; modules
+# fall back to in-process implementations when these are missing). ---
+nats-py>=2.6
+qdrant-client>=1.9

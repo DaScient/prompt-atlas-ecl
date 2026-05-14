@@ -1,0 +1,42 @@
+# ──────────────────────────────────────────────────────────────────────────
+#  Prompt Atlas Engine — Phase 1 dev infrastructure
+#  Brings up NATS (with JetStream) and Qdrant for local distributed runs.
+# ──────────────────────────────────────────────────────────────────────────
+#
+# Usage:
+#   docker compose -f infra/docker-compose.yml up -d
+#   # → NATS:   nats://localhost:4222   (monitoring on http://localhost:8222)
+#   # → Qdrant: http://localhost:6333   (gRPC on :6334, dashboard at /dashboard)
+#
+# Both services pin minor versions; bump them deliberately when upgrading.
+services:
+
+  nats:
+    image: nats:2.10-alpine
+    container_name: pae-nats
+    command:
+      - "-js"                      # enable JetStream for replay/persistence
+      - "-m"
+      - "8222"                     # HTTP monitoring port
+      - "--store_dir"
+      - "/data"
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+    volumes:
+      - nats-data:/data
+    restart: unless-stopped
+
+  qdrant:
+    image: qdrant/qdrant:v1.11.0
+    container_name: pae-qdrant
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant-data:/qdrant/storage
+    restart: unless-stopped
+
+volumes:
+  nats-data:
+  qdrant-data:

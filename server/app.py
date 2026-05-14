@@ -163,6 +163,9 @@ def step(run_id: str, auth=Depends(get_auth)):
     r["t"] += 1
     r["state"] = s
     r["trace"].append({"t": r["t"], "spec": spec, "tests": tests, "e_star": e_star})
+    CORE.remember_step(
+        run_id=run_id, step=r["t"], state=s, e_star=e_star, spec=spec, tests=tests,
+    )
 
     return StepResult(
         run_id=run_id,

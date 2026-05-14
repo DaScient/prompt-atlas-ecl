@@ -348,6 +348,100 @@ python hyperspectral_atlas_performance.py
 
 <br>
 
+## 🛰️ Phase 1 -- Distributed Orchestration (MACP + Vector Memory)
+
+The ECL core ships with a lightweight **Multi-Agent Communication Protocol** and a **long-term vector memory** layer so that Writer / Tester / Ethics / Latent agents can be distributed across processes (or hosts / accelerators) and share state asynchronously.
+
+Both layers are designed with a **strict data-sovereignty stance**: they default to in-process fallbacks and only reach for external services (NATS, Qdrant) when you explicitly point at them.
+
+<br>
+
+### MACP -- the Entanglement Bus
+
+* Transport: **NATS + JetStream** when [`nats-py`](https://github.com/nats-io/nats.py) is installed and reachable; an in-memory loopback otherwise.
+* Subject convention: `macp.<run_id>.<source_role>.<event_kind>` (JetStream-friendly for replay/persistence).
+* Strict, schema-versioned message contracts via Pydantic (`EntanglementEvent`).
+* Minimal `Agent` base class makes it trivial to add Writer / Tester / Ethics agents.
+
+```python
+import asyncio
+from src.macp import (
+    Agent, AgentRole, EntanglementBusBroker, EntanglementEvent, EventKind,
+)
+
+class Writer(Agent):
+    role = AgentRole.WRITER
+    subscribe_kind = EventKind.RUN_STARTED.value
+
+    async def on_event(self, event):
+        await self.emit(EventKind.SPEC_PROPOSED, {"spec": {"goal": event.payload["goal"]}})
+
+async def main():
+    # nats_servers=["nats://localhost:4222"] for distributed mode
+    broker = EntanglementBusBroker()
+    async with broker:
+        w = Writer(broker, run_id="run-1"); await w.start()
+        await broker.publish(EntanglementEvent(
+            run_id="run-1", kind=EventKind.RUN_STARTED,
+            source=AgentRole.ORCHESTRATOR, payload={"goal": "design API"},
+        ))
+        await asyncio.sleep(0.1)
+
+asyncio.run(main())
+```
+
+<br>
+
+### Vector Memory -- Long-Term Co-Learning Recall
+
+`CoLearningMemoryStore` persists `(state vector, spec, tests, E*)` tuples so future runs can retrieve **what you tried before** and condition new co-learning on it.
+
+* Backend: **Qdrant** (cosine distance, payload filtering) when `qdrant-client` + a Qdrant URL are configured; pure-Python in-memory backend otherwise.
+* Enable from the API by setting `PAE_MEMORY=1` (and optionally `QDRANT_URL`, `QDRANT_API_KEY`); every `/runs/{id}/step` will then be persisted automatically.
+
+```python
+from src.vectorstore import CoLearningMemoryStore
+
+store = CoLearningMemoryStore(qdrant_url="http://localhost:6333")  # or omit for fallback
+store.remember(run_id="run-1", vector=[0.1] * 64, e_star=1.7,
+               spec={"goal": "..."}, tests=[], tags=["api", "phase1"])
+for score, point in store.recall([0.1] * 64, limit=5):
+    print(score, point.payload.run_id, point.payload.e_star)
+```
+
+<br>
+
+### Bring Up the Phase-1 Infrastructure
+
+```bash
+# Optional: install the distributed extras.
+pip install nats-py qdrant-client
+
+# Start NATS (JetStream) + Qdrant locally.
+docker compose -f infra/docker-compose.yml up -d
+# NATS:   nats://localhost:4222   (monitoring on :8222)
+# Qdrant: http://localhost:6333   (dashboard at /dashboard)
+
+# End-to-end roundtrip smoke test (uses fallbacks if services aren't running).
+python -m scripts.macp_smoke
+
+# Run the new unit tests.
+pytest tests/ -q
+```
+
+To run the API server with persistent memory enabled:
+
+```bash
+PAE_MEMORY=1 QDRANT_URL=http://localhost:6333 \
+  uvicorn server.app:app --reload --port 8000
+```
+
+<br>
+
+---
+
+<br>
+
 ## 🌐 API Reference
 
 <br>

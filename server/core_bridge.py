@@ -1,17 +1,28 @@
 # server/core_bridge.py
+import os
 from typing import Dict, Any, List, Optional
 import torch
 from torch import nn
 
 from src.state_bus import EntanglementBus
 from src.losses import info_nce
+from src.vectorstore import CoLearningMemoryStore
 
 class Core(nn.Module):
     """
     Thin stepper for the API.
     Uses tiny projection heads + GRU bus to advance a shared state and compute an E* proxy.
+
+    When ``PAE_MEMORY=1`` is set, each step is persisted to a
+    :class:`CoLearningMemoryStore` (Qdrant if ``QDRANT_URL`` is configured, else
+    the in-memory fallback) so future runs can recall past co-learning trajectories.
     """
-    def __init__(self, device: str = "cpu", state_dim: int = 64):
+    def __init__(
+        self,
+        device: str = "cpu",
+        state_dim: int = 64,
+        memory: Optional[CoLearningMemoryStore] = None,
+    ):
         super().__init__()
         self.device = device
         self.state_dim = state_dim
@@ -24,6 +35,15 @@ class Core(nn.Module):
         self.bus = EntanglementBus(state_dim, in_dim=256 * 2)
 
         self.to(self.device)
+
+        # Optional long-term memory. Default off to keep behavior unchanged.
+        self.memory: Optional[CoLearningMemoryStore] = memory
+        if self.memory is None and os.getenv("PAE_MEMORY", "0") == "1":
+            self.memory = CoLearningMemoryStore(
+                qdrant_url=os.getenv("QDRANT_URL") or None,
+                qdrant_api_key=os.getenv("QDRANT_API_KEY") or None,
+                vector_size=state_dim,
+            )
 
     @torch.inference_mode()
     def step(self, S_list: Optional[List[float]] = None) -> Dict[str, Any]:
@@ -66,3 +86,25 @@ class Core(nn.Module):
             "e_star": e_star,
             "state": S_next.detach().cpu().view(-1).tolist(),
         }
+
+    def remember_step(
+        self,
+        *,
+        run_id: str,
+        step: int,
+        state: List[float],
+        e_star: float,
+        spec: Dict[str, Any],
+        tests: List[Dict[str, Any]],
+    ) -> None:
+        """Persist this step into the long-term memory store, if enabled."""
+        if self.memory is None:
+            return
+        self.memory.remember(
+            run_id=run_id,
+            step=step,
+            vector=list(state),
+            e_star=e_star,
+            spec=spec,
+            tests=tests,
+        )
