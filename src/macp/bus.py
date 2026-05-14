@@ -58,18 +58,25 @@ class InMemoryTransport(_Transport):
 
     def __init__(self) -> None:
         self._subs: List[tuple[str, Callable[[str, bytes], Awaitable[None]]]] = []
-        self._lock = asyncio.Lock()
+        # Created lazily on first use so the lock binds to the running event
+        # loop, not whatever loop happened to be current at construction time.
+        self._lock: Optional[asyncio.Lock] = None
+
+    def _get_lock(self) -> asyncio.Lock:
+        if self._lock is None:
+            self._lock = asyncio.Lock()
+        return self._lock
 
     async def connect(self) -> None:  # no-op
         return None
 
     async def close(self) -> None:
-        async with self._lock:
+        async with self._get_lock():
             self._subs.clear()
 
     async def publish(self, subject: str, payload: bytes) -> None:
         # Snapshot subscribers to avoid mutation during fan-out.
-        async with self._lock:
+        async with self._get_lock():
             targets = list(self._subs)
         for filt, cb in targets:
             if _subject_matches(filt, subject):
@@ -79,7 +86,7 @@ class InMemoryTransport(_Transport):
     async def subscribe(
         self, subject_filter: str, cb: Callable[[str, bytes], Awaitable[None]]
     ) -> None:
-        async with self._lock:
+        async with self._get_lock():
             self._subs.append((subject_filter, cb))
 
 

@@ -132,6 +132,13 @@ class QdrantBackend(_VectorBackend):
 class CoLearningMemoryStore:
     """Long-term memory for ECL runs.
 
+    .. note::
+        With the Qdrant backend, :meth:`recall` returns points whose ``vector``
+        list is empty (only the similarity score + payload are surfaced). This
+        avoids round-tripping potentially large vectors over the wire. The
+        in-memory backend returns the full vector. Callers that need vectors
+        back from Qdrant should query the underlying client directly.
+
     Example
     -------
     >>> store = CoLearningMemoryStore()                       # in-memory fallback
