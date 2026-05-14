@@ -10,3 +10,17 @@ loss_weights:
   u: 0.25
   con: 1.0
   div: 0.2
+  # Phase 2 — distribution-geometry signals between Writer / Tester latents.
+  # Keep these small until training is verified; they grow quickly with state_dim.
+  wass: 0.1   # Sinkhorn-regularized Wasserstein-2
+  mmd: 0.1    # multi-bandwidth Gaussian MMD²
+# Phase 2 — Sinkhorn solver knobs (used when wass > 0)
+sinkhorn:
+  epsilon: 0.05
+  n_iters: 30
+# Phase 2 — MLflow experiment tracking. Disabled by default; enable with
+# PAE_TRACKING=1 or by setting `enabled: true` here.
+tracking:
+  enabled: false
+  experiment: prompt-atlas-ecl
+  run_name: null

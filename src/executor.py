@@ -1,10 +1,18 @@
-import json, numpy as np
+import json
+import numpy as np
+
+from src.testers import verify_spec
+
 
 def soft_violation(spec_json: str, tests_json: str):
-    s = json.loads(spec_json); t = json.loads(tests_json)
-    checks = [
-        0.0 if "acceptance" in s and s["acceptance"] else 1.0,
-        max(0.0, 1.0 - len(t)/5),
-        0.5 if "risks" in s and s["risks"] else 1.0
-    ]
-    return np.array(checks, dtype=np.float32)
+    """Numeric violation vector for a (spec, tests) pair.
+
+    Phase 2: delegates the structural check to :func:`src.testers.verify_spec`
+    (Z3 when available, pure-Python fallback otherwise) and exposes the
+    result through the original ``ndarray`` shape so existing callers
+    keep working unchanged.
+    """
+    spec = json.loads(spec_json)
+    tests = json.loads(tests_json)
+    report = verify_spec(spec, tests)
+    return np.array(report.as_violation_vector(), dtype=np.float32)

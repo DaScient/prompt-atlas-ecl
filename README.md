@@ -442,6 +442,52 @@ PAE_MEMORY=1 QDRANT_URL=http://localhost:6333 \
 
 <br>
 
+## 🔬 Phase 2 -- Loss Geometry, Formal Verification, Experiment Tracking
+
+Phase 2 adds the **scientific instrumentation** that lets ECL's co-learning be both more rigorous and more observable:
+
+### Distribution-geometry losses (`src/losses_geom.py`)
+
+The earlier training loop only had a per-sample contrastive signal (InfoNCE). Phase 2 adds two batch-level distributional terms:
+
+- **Sinkhorn-regularized Wasserstein-2** — entropy-regularized optimal transport between Writer and Tester latent batches, computed in log-space for stability and fully differentiable.
+- **Multi-bandwidth Gaussian MMD²** — kernel-mean-discrepancy estimator (Gretton et al. 2012) using a sum of RBF kernels so it's sensitive across scales.
+- **Real `kl_sym`** — moment-matched Gaussian symmetric KL replaces the previous `return torch.tensor(0.0)` stub.
+
+All three are weight-gated in `configs/ecl_llm_llm.yaml` (`loss_weights.wass`, `loss_weights.mmd`); set to `0.0` to recover Phase 1 behavior.
+
+### Symbolic Tester (`src/testers/z3_tester.py`)
+
+The Phase 1 tester was a hand-rolled field counter. Phase 2 promotes it to a **structural verifier** with the same optional-dependency contract used in Phase 1:
+
+- When the optional `z3-solver` package is installed, the Tester builds a Z3 model over required-field predicates plus a test-coverage constraint and asks the solver whether the spec is satisfiable.
+- Otherwise an **equivalent pure-Python checker** runs. Both paths return the same `VerificationReport`, and `src.executor.soft_violation` keeps its `ndarray` API so existing callers are unaffected.
+
+```python
+from src.testers import verify_spec
+report = verify_spec(spec_dict, tests_list)
+report.satisfied, report.missing_fields, report.backend  # → bool, [...], "z3" or "python"
+```
+
+### MLflow experiment tracking (`src/tracking/MLflowTracker`)
+
+Training and the API can now stream params/metrics to MLflow:
+
+- Set `PAE_TRACKING=1` (or `tracking.enabled: true` in the config) to turn it on.
+- `MLFLOW_TRACKING_URI` is honored for remote tracking; default is MLflow's local file store.
+- If `mlflow` isn't installed, every call becomes a silent no-op — exactly the same pattern as the NATS / Qdrant fallbacks from Phase 1.
+
+```bash
+pip install mlflow             # optional
+PAE_TRACKING=1 python -m src.train_ecl
+```
+
+<br>
+
+---
+
+<br>
+
 ## 🌐 API Reference
 
 <br>
