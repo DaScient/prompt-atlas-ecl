@@ -1,0 +1,45 @@
+# Chapter 12 — Designing Permanence
+chapter: 12
+slug: designing-permanence
+anchor: "../../PROMPT_ATLAS.md#ch12-designing-permanence"
+prompts:
+  - id: ch12-millennial-governance
+    title: Millennial Governance
+    text: "Design a political system intended to last 1,000 years. How does it adapt to generational shifts without losing identity?"
+    themes: [governance, long-term]
+  - id: ch12-knowledge-time-capsules
+    title: Knowledge Time Capsules
+    text: "Propose AI-curated archives that remain interpretable across languages, cultures, and even species."
+    themes: [archive, interpretability]
+  - id: ch12-adaptive-religion
+    title: Adaptive Religion
+    text: "Imagine a spiritual system co-created with AI that renews rituals every century while preserving its essence."
+    themes: [religion, adaptation]
+  - id: ch12-monument-evolution
+    title: Monument Evolution
+    text: "Design a building that physically changes with climate and culture, but always remains recognizable."
+    themes: [architecture, adaptation]
+  - id: ch12-memory-insurance
+    title: Memory Insurance
+    text: "Develop a global AI-managed protocol that ensures human knowledge is never lost, even after collapse."
+    themes: [memory-guardianship, redundancy]
+  - id: ch12-constitution-for-civilizations
+    title: Constitution for Civilizations
+    text: "Write a constitution designed not for nations, but for planetary and interstellar humanity."
+    themes: [constitution, planetary]
+  - id: ch12-ethics-of-eternity
+    title: Ethics of Eternity
+    text: "What values should be enshrined if we want them to outlast generations — compassion, curiosity, resilience?"
+    themes: [values, eternity]
+  - id: ch12-interstellar-libraries
+    title: Interstellar Libraries
+    text: "Model how AI might encode human culture into signals or artifacts that survive for millions of years."
+    themes: [archive, deep-time]
+  - id: ch12-dynamic-democracy
+    title: Dynamic Democracy
+    text: "Design a governance system where laws automatically adapt to changing data while preserving core human rights."
+    themes: [democracy, adaptive-law]
+  - id: ch12-permanence-in-play
+    title: Permanence in Play
+    text: "How can games, stories, or music be designed to remain meaningful for millennia?"
+    themes: [play, longevity]

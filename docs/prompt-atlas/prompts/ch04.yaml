@@ -1,0 +1,45 @@
+# Chapter 4 — Storytelling Across Civilizations
+chapter: 4
+slug: storytelling-across-civilizations
+anchor: "../../PROMPT_ATLAS.md#ch4-storytelling-across-civilizations"
+prompts:
+  - id: ch4-ai-as-mythographer
+    title: AI as Mythographer
+    text: "Write a creation myth as if AI itself were narrating humanity's origin to our distant descendants."
+    themes: [creation-myth, narration]
+  - id: ch4-utopias-and-failures
+    title: Utopias and Failures
+    text: "Describe a utopia designed by AI that inevitably collapses — and what lessons its fall teaches."
+    themes: [utopia, collapse]
+  - id: ch4-interwoven-myths
+    title: Interwoven Myths
+    text: "Merge the Epic of Gilgamesh, Buddhist sutras, and African griot tales into a single narrative about survival in the AI age."
+    themes: [hybrid-myth]
+  - id: ch4-civilization-mirrors
+    title: Civilization Mirrors
+    text: "Compare today's AI boom with the fall of Rome, the rise of the Mongol Empire, and the Industrial Revolution — what narrative patterns repeat?"
+    themes: [history, pattern]
+  - id: ch4-future-epics
+    title: Future Epics
+    text: "Write an epic poem about humanity's migration into space, narrated not by humans but by the asteroids watching them."
+    themes: [epic, non-human-narrator]
+  - id: ch4-folk-knowledge
+    title: Folk Knowledge
+    text: "Gather lost agricultural proverbs from across the world and reframe them into climate-adaptation wisdom for the 21st century."
+    themes: [folk-wisdom, climate]
+  - id: ch4-cross-species-storytelling
+    title: Cross-Species Storytelling
+    text: "Imagine a fable co-authored by humans and elephants, mediated by AI translation of memory and song."
+    themes: [interspecies, fable]
+  - id: ch4-sacred-algorithm
+    title: Sacred Algorithm
+    text: "Invent a scripture where code is divine text — what commandments would it write?"
+    themes: [scripture, code]
+  - id: ch4-planetary-folklore
+    title: Planetary Folklore
+    text: "Design legends for future Martian children about why the sky is red and Earth is blue."
+    themes: [planetary, children]
+  - id: ch4-myth-of-collapse
+    title: Myth of Collapse
+    text: "Tell the story of a civilization that survived precisely because it embraced AI as its storyteller."
+    themes: [collapse, survival]

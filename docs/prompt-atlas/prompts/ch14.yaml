@@ -1,0 +1,45 @@
+# Chapter 14 — Wonder as Survival Strategy
+chapter: 14
+slug: wonder-as-survival-strategy
+anchor: "../../PROMPT_ATLAS.md#ch14-wonder-as-survival-strategy"
+prompts:
+  - id: ch14-cosmic-mirror
+    title: Cosmic Mirror
+    text: "Compose an AI-guided meditation that places a human life in the context of cosmic time and scale."
+    themes: [meditation, scale]
+  - id: ch14-everyday-awe
+    title: Everyday Awe
+    text: "Design a system that helps people find wonder in the ordinary — leaves, sidewalks, rainstorms — using AI augmentation."
+    themes: [everyday, augmentation]
+  - id: ch14-future-temples
+    title: Future Temples
+    text: "Imagine sacred spaces designed by AI, built not for worship but for cultivating awe at existence itself."
+    themes: [sacred-space, awe]
+  - id: ch14-interstellar-storytelling
+    title: Interstellar Storytelling
+    text: "Write a tale of a civilization that survives not through weapons or wealth, but through rituals of awe."
+    themes: [story, ritual]
+  - id: ch14-awe-algorithms
+    title: Awe Algorithms
+    text: "Develop a recommendation system that amplifies curiosity and wonder, rather than outrage or addiction."
+    themes: [recommendation, curiosity]
+  - id: ch14-ecological-wonder
+    title: Ecological Wonder
+    text: "Create an AI exhibit that lets people experience ecosystems from the perspective of a bee, a mushroom, or a whale."
+    themes: [ecology, perspective]
+  - id: ch14-time-horizon-meditation
+    title: Time Horizon Meditation
+    text: "Generate prompts that encourage thinking not in days or years, but in centuries and epochs."
+    themes: [deep-time, meditation]
+  - id: ch14-alien-wonder
+    title: Alien Wonder
+    text: "Speculate what might fill an extraterrestrial intelligence with awe — could AI translate this across species?"
+    themes: [alien, translation]
+  - id: ch14-mathematics-of-beauty
+    title: Mathematics of Beauty
+    text: "Design visualizations where the elegance of equations (like Euler's identity) is revealed as art."
+    themes: [math, visualization]
+  - id: ch14-awe-and-justice
+    title: Awe and Justice
+    text: "Model how cultivating collective awe might reduce violence or social fragmentation."
+    themes: [awe, justice]

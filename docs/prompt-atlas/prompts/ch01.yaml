@@ -1,0 +1,45 @@
+# Chapter 1 — Profits with Integrity
+chapter: 1
+slug: profits-with-integrity
+anchor: "../../PROMPT_ATLAS.md#ch1-profits-with-integrity"
+prompts:
+  - id: ch1-planetary-business-models
+    title: Planetary Business Models
+    text: "Generate a global business model where every transaction heals ecosystems rather than harms them. What does its balance sheet look like?"
+    themes: [regenerative-capitalism, balance-sheet]
+  - id: ch1-century-dividends
+    title: Century Dividends
+    text: "Design a financial instrument that pays profits not just to current investors but to descendants one hundred years from now."
+    themes: [long-now, intergenerational]
+  - id: ch1-antifragile-enterprises
+    title: Antifragile Enterprises
+    text: "Propose strategies for building organizations that grow stronger when disrupted, using lessons from rainforest dynamics or immune systems."
+    themes: [antifragile, biomimicry]
+  - id: ch1-royalty-economies
+    title: Royalty Economies
+    text: "Simulate a future economy where citizens earn dividends whenever their personal data contributes to AI training."
+    themes: [data-rights, royalty]
+  - id: ch1-adaptive-trade-routes
+    title: Adaptive Trade Routes
+    text: "Forecast how autonomous ships, drones, and space elevators will reshape global commerce, and what new profit centers will emerge."
+    themes: [logistics, infrastructure]
+  - id: ch1-ethical-arbitrage
+    title: Ethical Arbitrage
+    text: "Develop arbitrage strategies that exploit inefficiencies only when they also generate measurable public good."
+    themes: [arbitrage, public-good]
+  - id: ch1-regenerative-capitalism
+    title: Regenerative Capitalism
+    text: "Design an AI-guided marketplace where the highest returns flow to businesses that regenerate soil, forests, and oceans."
+    themes: [regenerative-capitalism]
+  - id: ch1-crisis-driven-opportunity
+    title: Crisis-Driven Opportunity
+    text: "How can businesses pivot in response to planetary crises (heatwaves, pandemics, floods) in ways that protect both profits and vulnerable populations?"
+    themes: [resilience, equity]
+  - id: ch1-post-scarcity-profit
+    title: Post-Scarcity Profit
+    text: "Speculate on how wealth works in a world where AI and robotics eliminate scarcity in some sectors — what becomes scarce, and how is it priced?"
+    themes: [post-scarcity]
+  - id: ch1-profit-beyond-earth
+    title: Profit Beyond Earth
+    text: "Create models for interplanetary economies: what industries flourish first on the Moon, Mars, or orbital stations?"
+    themes: [space-economy]

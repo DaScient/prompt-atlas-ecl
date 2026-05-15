@@ -1,0 +1,45 @@
+# Chapter 10 — Information as Cosmic Currency
+chapter: 10
+slug: information-as-cosmic-currency
+anchor: "../../PROMPT_ATLAS.md#ch10-information-as-cosmic-currency"
+prompts:
+  - id: ch10-cosmic-currency
+    title: Cosmic Currency
+    text: "Design a currency based on data packets, where compression efficiency and information integrity determine value."
+    themes: [currency, compression]
+  - id: ch10-star-maps-as-wealth
+    title: Star Maps as Wealth
+    text: "Imagine a galactic economy where owning accurate navigational data to wormholes is the most valuable asset."
+    themes: [wormhole-ledger, navigation]
+  - id: ch10-myth-exchange
+    title: Myth Exchange
+    text: "Speculate on interspecies trade where myths and stories are valued as highly as resources."
+    themes: [myth, interspecies]
+  - id: ch10-genomic-gold-standard
+    title: Genomic Gold Standard
+    text: "Model an economy where genetic sequences of resilient organisms are the primary unit of trade."
+    themes: [genomics, currency]
+  - id: ch10-entropy-market
+    title: Entropy Market
+    text: "Create a system where reducing entropy in chaotic environments becomes a profitable service."
+    themes: [entropy, service-economy]
+  - id: ch10-information-embargo
+    title: Information Embargo
+    text: "What happens if one civilization hoards communication algorithms that others cannot decode?"
+    themes: [embargo, monopoly]
+  - id: ch10-data-relics
+    title: Data Relics
+    text: "Imagine alien artifacts that are not material objects but compressed cultural archives — how might AI decode and trade them?"
+    themes: [archive, archaeology]
+  - id: ch10-latency-economics
+    title: Latency Economics
+    text: "Model a market where the value of information decays with light-speed delay — how do civilizations manage time asymmetry?"
+    themes: [latency, value-decay]
+  - id: ch10-ai-stock-exchange
+    title: AI Stock Exchange
+    text: "Simulate a marketplace where autonomous AIs trade knowledge directly, bypassing human oversight."
+    themes: [agentic-markets, oversight]
+  - id: ch10-memory-as-wealth
+    title: Memory as Wealth
+    text: "Speculate on a future where individuals or AIs rent out parts of their memory archives as economic assets."
+    themes: [memory, rental]

@@ -1,0 +1,45 @@
+# Chapter 5 — Quantum Bridges and Cosmic Noise
+chapter: 5
+slug: quantum-bridges-and-cosmic-noise
+anchor: "../../PROMPT_ATLAS.md#ch5-quantum-bridges-and-cosmic-noise"
+prompts:
+  - id: ch5-quantum-relativity-bridge
+    title: Quantum-Relativity Bridge
+    text: "Propose experimental setups where AI could help reveal overlaps between quantum mechanics and relativity, using simulations testable within 50 years."
+    themes: [unification, experiment]
+  - id: ch5-cosmic-pattern-finder
+    title: Cosmic Pattern Finder
+    text: "Train AI to search cosmic background radiation for patterns dismissed as noise — what anomalies emerge?"
+    themes: [cosmic-noise, anomaly]
+  - id: ch5-time-granularity
+    title: Time Granularity
+    text: "Imagine time not as a line but as discrete quanta — how could AI model phenomena at this scale?"
+    themes: [time, quantum]
+  - id: ch5-particle-myths
+    title: Particle Myths
+    text: "Narrate the Higgs boson as if it were a character in a myth — what new metaphors suggest alternative interpretations?"
+    themes: [metaphor, particle-physics]
+  - id: ch5-unification-simulations
+    title: Unification Simulations
+    text: "Design a sandbox where AI evolves new physical laws by simulating universes with altered constants."
+    themes: [simulation, physics]
+  - id: ch5-astrophysical-compression
+    title: Astrophysical Compression
+    text: "Could AI compress the behavior of galaxies into a few governing equations, the way Newton compressed orbits into gravity?"
+    themes: [compression, equations]
+  - id: ch5-quantum-biology
+    title: Quantum Biology
+    text: "Explore ways AI might model life processes (like photosynthesis or consciousness) as quantum phenomena."
+    themes: [quantum, biology]
+  - id: ch5-dark-matter-storyboard
+    title: Dark Matter Storyboard
+    text: "Generate theories of dark matter framed not as particles but as informational constraints."
+    themes: [dark-matter, information]
+  - id: ch5-spacetime-anomalies
+    title: Spacetime Anomalies
+    text: "Simulate how an AI might detect micro-wormholes in astronomical data where humans see nothing."
+    themes: [wormhole, detection]
+  - id: ch5-ethics-of-discovery
+    title: Ethics of Discovery
+    text: "If AI discovers a new physical law that humans cannot comprehend, should it simplify or withhold?"
+    themes: [ethics, interpretability]

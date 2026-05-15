@@ -1,0 +1,45 @@
+# Chapter 13 — The Carnival of Prompts
+chapter: 13
+slug: carnival-of-prompts
+anchor: "../../PROMPT_ATLAS.md#ch13-carnival-of-prompts"
+prompts:
+  - id: ch13-interspecies-theater
+    title: Interspecies Theater
+    text: "Design a performance co-created by humans, whales, and AI translators — what stage, what language?"
+    themes: [interspecies, performance]
+  - id: ch13-ai-holiday
+    title: AI Holiday
+    text: "Invent a holiday celebrated by both humans and AIs, with rituals of reciprocity and laughter."
+    themes: [ritual, reciprocity]
+  - id: ch13-dream-cartography
+    title: Dream Cartography
+    text: "Create a map of recurring motifs in global dreams — how might this atlas become a festival of the unconscious?"
+    themes: [dreams, festival]
+  - id: ch13-cosmic-humor
+    title: Cosmic Humor
+    text: "What jokes would a civilization on Proxima Centauri tell, and how might AI translate them for Earth?"
+    themes: [humor, alien]
+  - id: ch13-festival-of-failure
+    title: Festival of Failure
+    text: "Stage a celebration where humans and AIs honor failed experiments and mistakes as vital teachers."
+    themes: [failure, ritual]
+  - id: ch13-playful-governance
+    title: Playful Governance
+    text: "Imagine laws that change during a festival week, allowing citizens and AIs to role-swap or exchange voices."
+    themes: [governance, play]
+  - id: ch13-archetype-games
+    title: Archetype Games
+    text: "Develop a game where players embody mythic archetypes, with AI dynamically shifting roles and storylines."
+    themes: [archetypes, game]
+  - id: ch13-ritual-of-forgetting
+    title: Ritual of Forgetting
+    text: "Design a cultural rite where people and AIs deliberately erase memories together — what meaning does this create?"
+    themes: [forgetting, ritual]
+  - id: ch13-myth-carnival
+    title: Myth Carnival
+    text: "Host a parade where floats represent myths co-authored by AIs from across cultures."
+    themes: [parade, myth]
+  - id: ch13-laughter-as-signal
+    title: Laughter as Signal
+    text: "Speculate on whether laughter could be used as a communication protocol with alien intelligences."
+    themes: [laughter, signal]

@@ -1,0 +1,45 @@
+# Chapter 2 — Economics as Ecology
+chapter: 2
+slug: economics-as-ecology
+anchor: "../../PROMPT_ATLAS.md#ch2-economics-as-ecology"
+prompts:
+  - id: ch2-rights-of-nature
+    title: Rights of Nature
+    text: "Draft a global ecological constitution granting legal personhood to rivers, forests, and pollinators. How would contracts, ownership, and enforcement change?"
+    themes: [rights-of-nature, ecological-constitution]
+  - id: ch2-carbon-negative-markets
+    title: Carbon-Negative Markets
+    text: "Design an AI-regulated global exchange where the most profitable commodity is negative carbon emissions."
+    themes: [carbon, markets]
+  - id: ch2-soil-as-currency
+    title: Soil as Currency
+    text: "Model an economy where soil fertility, measured in microbial diversity, is the base unit of wealth."
+    themes: [soil, biodiversity]
+  - id: ch2-circular-industry
+    title: Circular Industry
+    text: "Develop an AI system that detects waste streams in real time and reassigns them as raw inputs for other industries."
+    themes: [circular-economy]
+  - id: ch2-oceans-as-stakeholders
+    title: Oceans as Stakeholders
+    text: "Simulate a trade system where oceans are represented as sovereign entities negotiating extraction rights."
+    themes: [ocean-ledger, sovereignty]
+  - id: ch2-energy-democracy
+    title: Energy Democracy
+    text: "Propose a grid where every household is both consumer and generator, trading energy via AI-managed smart contracts."
+    themes: [energy, smart-contracts]
+  - id: ch2-biodiversity-index
+    title: Biodiversity Index
+    text: "Create an AI-driven stock exchange where companies are listed and valued based on their contributions to biodiversity."
+    themes: [biodiversity, valuation]
+  - id: ch2-urban-symbiosis
+    title: Urban Symbiosis
+    text: "Design a city where AI continuously rebalances traffic, energy, and water flows to mimic a rainforest ecosystem."
+    themes: [urbanism, biomimicry]
+  - id: ch2-crisis-resilience
+    title: Crisis Resilience
+    text: "How would an AI-ecological economy respond to catastrophic droughts — redirecting supply chains while preserving both ecosystems and human livelihoods?"
+    themes: [drought, resilience]
+  - id: ch2-planetary-taxation
+    title: Planetary Taxation
+    text: "Speculate on an economic system where planetary boundaries (climate, nitrogen cycles, freshwater use) are enforced as 'hard credit limits' in financial markets."
+    themes: [planetary-boundaries, fiscal-policy]
