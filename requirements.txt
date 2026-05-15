@@ -5,3 +5,24 @@ jsonschema
 fastapi
 uvicorn
 pydantic
+
+# --- Phase 1: Distributed orchestration (optional at runtime; modules
+# fall back to in-process implementations when these are missing). ---
+nats-py>=2.6
+qdrant-client>=1.9
+
+# --- Phase 2: Loss geometry, formal verification, experiment tracking
+# (all optional at runtime; modules fall back to pure-Python / no-op
+# implementations when these are missing). ---
+# z3-solver upgrades src.testers from a heuristic field-counter into a
+# symbolic verifier. Without it, src.testers falls back to a pure-Python
+# equivalent that returns the same VerificationReport shape.
+z3-solver>=4.12
+# mlflow is intentionally NOT pinned here because we only use it as a
+# client library (file-store by default) — install it manually if you
+# want MLflow tracking:  pip install 'mlflow>=3.9'
+
+# --- Phase 3: Persistent runs (optional at runtime; the API falls back
+# to an in-memory RunStore when SQLAlchemy isn't installed or when
+# `PAE_DATABASE_URL` is unset). ---
+sqlalchemy>=2.0

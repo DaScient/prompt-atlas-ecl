@@ -1,0 +1,33 @@
+id: science-1
+version: 0.1.0
+title: Science & Precision
+domain: science
+author: Prompt Atlas core
+license: MIT
+tags:
+  - model
+  - measure
+  - uncertainty
+description: >
+  Force a design to declare its model, what it measures, and where
+  uncertainty lives. Useful when "AI" is doing a job that used to
+  belong to instruments.
+defaults:
+  artifact: "the proposed system"
+prompts:
+  - name: model_card
+    role: system
+    description: One-page model card.
+    inputs: [artifact]
+    body: |
+      Produce a one-page model card for {artifact}: inputs, outputs,
+      assumptions, training data, known failure modes, and the metric
+      you would use to detect drift in production.
+  - name: uncertainty_map
+    role: system
+    description: Where are the sharp uncertainties?
+    inputs: [artifact]
+    body: |
+      List the top five sources of uncertainty in {artifact}.
+      For each: how it manifests, who notices first, and one cheap
+      probe to keep it visible.

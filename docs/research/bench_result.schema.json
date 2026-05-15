@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/DaScient/prompt-atlas-ecl/docs/research/bench_result.schema.json",
+  "title": "Prompt Atlas benchmark result",
+  "description": "Output schema for scripts/bench.py. Stable contract for downstream notebooks / papers.",
+  "type": "object",
+  "required": ["version", "config", "metrics"],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "const": 1
+    },
+    "config": {
+      "type": "object",
+      "required": ["steps", "state_dim", "use_llm", "brief"],
+      "properties": {
+        "steps": {"type": "integer", "minimum": 1},
+        "state_dim": {"type": "integer", "minimum": 1},
+        "use_llm": {"type": "boolean"},
+        "brief": {"type": "object"}
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "required": [
+        "e_star_series",
+        "drift_series",
+        "e_star_mean",
+        "e_star_final",
+        "drift_mean",
+        "wallclock_seconds",
+        "steps_per_second"
+      ],
+      "properties": {
+        "e_star_series": {
+          "type": "array",
+          "items": {"type": "number"}
+        },
+        "drift_series": {
+          "type": "array",
+          "items": {"type": "number"}
+        },
+        "e_star_mean": {"type": "number"},
+        "e_star_final": {"type": "number"},
+        "drift_mean": {"type": "number"},
+        "wallclock_seconds": {"type": "number", "minimum": 0},
+        "steps_per_second": {"type": "number", "minimum": 0}
+      }
+    }
+  }
+}
