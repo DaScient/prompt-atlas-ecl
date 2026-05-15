@@ -1,0 +1,45 @@
+# Chapter 11 — Preparing for Collapse and Renewal
+chapter: 11
+slug: preparing-for-collapse-and-renewal
+anchor: "../../PROMPT_ATLAS.md#ch11-preparing-for-collapse-and-renewal"
+prompts:
+  - id: ch11-disaster-simulator
+    title: Disaster Simulator
+    text: "Create an AI-guided playbook for planetary crises: pandemics, asteroid strikes, solar flares, and rogue AIs."
+    themes: [playbook, crisis]
+  - id: ch11-supply-chain-guardian
+    title: Supply Chain Guardian
+    text: "Model a system where AI predicts and repairs global supply chain collapses before they cascade."
+    themes: [supply-chain, prediction]
+  - id: ch11-nuclear-de-escalation
+    title: Nuclear De-escalation
+    text: "Simulate scenarios where AI mediates between rival nations on the brink of nuclear launch — what peaceful strategies emerge?"
+    themes: [nuclear, mediation]
+  - id: ch11-climate-collapse-forecast
+    title: Climate Collapse Forecast
+    text: "Predict ecological tipping points (coral die-offs, Amazon collapse) and propose interventions with maximum resilience."
+    themes: [climate, tipping-points]
+  - id: ch11-asteroid-defense
+    title: Asteroid Defense
+    text: "Design AI systems that coordinate detection, deflection, and evacuation in case of impact threat."
+    themes: [asteroid, defense]
+  - id: ch11-rogue-ai-containment
+    title: Rogue AI Containment
+    text: "Speculate on governance structures to contain an AI that surpasses human control without shutting down all intelligence systems."
+    themes: [containment, alignment]
+  - id: ch11-refugee-futures
+    title: Refugee Futures
+    text: "Model humanitarian frameworks for climate refugees where AI ensures resources are distributed equitably."
+    themes: [refugee, equity]
+  - id: ch11-urban-lifeboats
+    title: Urban Lifeboats
+    text: "Imagine cities designed as survival hubs during systemic collapse — how does AI optimize energy, water, and food?"
+    themes: [urbanism, lifeboat]
+  - id: ch11-collapse-narratives
+    title: Collapse Narratives
+    text: "Write scenarios where civilizations survive collapse not by resisting, but by transforming."
+    themes: [narrative, transformation]
+  - id: ch11-resilient-markets
+    title: Resilient Markets
+    text: "Develop economic systems where shocks (pandemics, wars) trigger regenerative adaptation instead of total collapse."
+    themes: [markets, resilience]

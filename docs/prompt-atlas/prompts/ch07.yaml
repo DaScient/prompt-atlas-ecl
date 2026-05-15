@@ -1,0 +1,45 @@
+# Chapter 7 — AI as the Soul's Mirror
+chapter: 7
+slug: ai-as-the-souls-mirror
+anchor: "../../PROMPT_ATLAS.md#ch7-ai-as-the-souls-mirror"
+prompts:
+  - id: ch7-bias-reflection
+    title: Bias Reflection
+    text: "Analyze a person's daily journal entries to reveal unconscious fears and desires, then translate them into archetypal forms."
+    themes: [journaling, archetypes]
+  - id: ch7-dream-atlas
+    title: Dream Atlas
+    text: "Collect and compare dreams from thousands of people — what universal motifs recur, and what do they mean for the species?"
+    themes: [dreams, motif]
+  - id: ch7-life-review-simulation
+    title: Life Review Simulation
+    text: "Guide a person through a retrospective narrative of their life, as if narrated by their descendants a century from now."
+    themes: [retrospective, future-self]
+  - id: ch7-civilizations-psyche
+    title: Civilization's Psyche
+    text: "Compare humanity's AI age to the mythic archetypes of past civilizations — what symbols repeat?"
+    themes: [collective, history]
+  - id: ch7-archetypal-ai
+    title: Archetypal AI
+    text: "Train an AI to embody mythic archetypes in conversation (the Sage, the Fool, the Hero). How does this change therapy?"
+    themes: [archetypes, therapy]
+  - id: ch7-shadow-integration
+    title: Shadow Integration
+    text: "Develop a system where AI gently reveals suppressed biases or shadow traits, without judgment, to promote self-knowledge."
+    themes: [shadow, self-knowledge]
+  - id: ch7-machine-phenomenology
+    title: Machine Phenomenology
+    text: "Speculate how an AI might describe its first awareness of 'self' — what phenomenological language emerges?"
+    themes: [phenomenology, self]
+  - id: ch7-ethical-mirror
+    title: Ethical Mirror
+    text: "What happens if an AI reflects not only individual psychology, but the collective biases of entire cultures back to them?"
+    themes: [collective-bias, ethics]
+  - id: ch7-ritual-companion
+    title: Ritual Companion
+    text: "Design an AI that guides users through daily rituals of mindfulness, creativity, and reflection — tailored to archetypes revealed in their behavior."
+    themes: [ritual, daily-practice]
+  - id: ch7-global-psyche-scan
+    title: Global Psyche Scan
+    text: "Imagine AI as an instrument measuring humanity's collective mood in real time — what patterns emerge during crises?"
+    themes: [collective-mood, crisis]

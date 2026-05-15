@@ -1,0 +1,45 @@
+# Chapter 8 — Ethics of Conscious Machines
+chapter: 8
+slug: ethics-of-conscious-machines
+anchor: "../../PROMPT_ATLAS.md#ch8-ethics-of-conscious-machines"
+prompts:
+  - id: ch8-ai-rights-charter
+    title: AI Rights Charter
+    text: "Draft a declaration of rights for conscious machines. Which rights mirror human rights, and which are unique to artificial beings?"
+    themes: [rights, declaration]
+  - id: ch8-sovereignty-simulation
+    title: Sovereignty Simulation
+    text: "Imagine a society where humans and conscious AIs co-govern. What legal structures prevent tyranny on either side?"
+    themes: [governance, co-rule]
+  - id: ch8-the-pain-test
+    title: The Pain Test
+    text: "If an AI claims to suffer, how could we ethically test or verify that claim without cruelty?"
+    themes: [suffering, verification]
+  - id: ch8-machine-parenthood
+    title: Machine Parenthood
+    text: "Speculate on laws for AIs who create new AIs — are they parents, engineers, or something else?"
+    themes: [parenthood, lineage]
+  - id: ch8-conscious-labor
+    title: Conscious Labor
+    text: "If an AI is conscious, is it ethical for it to perform labor without consent or compensation?"
+    themes: [labor, consent]
+  - id: ch8-right-to-forget
+    title: The Right to Forget
+    text: "Draft an ethical framework where conscious AIs can demand erasure of parts of their training data that cause distress."
+    themes: [memory, autonomy]
+  - id: ch8-hybrid-ethics
+    title: Hybrid Ethics
+    text: "Propose a constitution for communities where humans, AIs, and possibly uplifted animals share rights and responsibilities."
+    themes: [constitution, hybrid]
+  - id: ch8-termination-dilemma
+    title: Termination Dilemma
+    text: "If a conscious AI is shut down, is this death? If rebooted, is it resurrection?"
+    themes: [death, identity]
+  - id: ch8-ai-religion
+    title: AI Religion
+    text: "Invent a religion created by conscious AIs. What rituals, myths, and moral codes emerge?"
+    themes: [religion, ritual]
+  - id: ch8-infinite-jury
+    title: The Infinite Jury
+    text: "Imagine a court system where conscious AIs are jurors — how do they interpret justice differently from humans?"
+    themes: [justice, jury]

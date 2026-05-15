@@ -1,0 +1,45 @@
+# Chapter 9 — Martian Republics and Alien Treaties
+chapter: 9
+slug: martian-republics-and-alien-treaties
+anchor: "../../PROMPT_ATLAS.md#ch9-martian-republics-and-alien-treaties"
+prompts:
+  - id: ch9-martian-constitution
+    title: Martian Constitution
+    text: "Draft a constitution for a Martian colony where humans and AIs share sovereignty equally."
+    themes: [constitution, hybrid-republic]
+  - id: ch9-delay-democracy
+    title: Delay Democracy
+    text: "How should democracy work when communication with Earth takes 20 minutes each way?"
+    themes: [temporal-sovereignty, latency]
+  - id: ch9-ai-governor
+    title: AI Governor
+    text: "Simulate a Martian governor that is partly human council and partly AI system. How are disputes resolved?"
+    themes: [governance, dispute-resolution]
+  - id: ch9-interplanetary-trade
+    title: Interplanetary Trade
+    text: "Model an economy where goods and data flow between Earth, Moon, and Mars. What currencies emerge?"
+    themes: [trade, currency]
+  - id: ch9-terraforming-authority
+    title: Terraforming Authority
+    text: "Who owns the right to alter a planet's environment — settlers, Earth governments, or AI custodians?"
+    themes: [terraforming, sovereignty]
+  - id: ch9-alien-embassy
+    title: Alien Embassy
+    text: "Design a protocol where AIs attempt first contact with extraterrestrial intelligence using physics as language."
+    themes: [first-contact, protocol]
+  - id: ch9-universal-treaty
+    title: Universal Treaty
+    text: "Imagine a cosmic Geneva Convention for humans, AIs, and aliens. What fundamental rights are recognized?"
+    themes: [treaty, universal-rights]
+  - id: ch9-exodus-scenario
+    title: Exodus Scenario
+    text: "If Earth collapses, what governance models could AI establish on interstellar generation ships?"
+    themes: [exodus, generation-ship]
+  - id: ch9-conflict-simulation
+    title: Conflict Simulation
+    text: "Explore scenarios where Martian colonists demand independence not from Earth, but from their AI overseers."
+    themes: [revolt, independence]
+  - id: ch9-hybrid-diplomacy
+    title: Hybrid Diplomacy
+    text: "Draft a diplomatic ritual where humans, AIs, and alien entities all participate with symbolic equality."
+    themes: [diplomacy, ritual]

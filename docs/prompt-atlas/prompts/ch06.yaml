@@ -1,0 +1,45 @@
+# Chapter 6 — Biology, Life, and Beyond
+chapter: 6
+slug: biology-life-and-beyond
+anchor: "../../PROMPT_ATLAS.md#ch6-biology-life-and-beyond"
+prompts:
+  - id: ch6-epigenetic-memory
+    title: Epigenetic Memory
+    text: "Model how experiences (like famine or stress) leave molecular traces in DNA across generations. What interventions could strengthen resilience?"
+    themes: [epigenetics, intergenerational]
+  - id: ch6-synthetic-symbiosis
+    title: Synthetic Symbiosis
+    text: "Design a synthetic organism whose primary purpose is to restore soil health or ocean ecosystems."
+    themes: [synthetic-biology, restoration]
+  - id: ch6-pandemic-prediction
+    title: Pandemic Prediction
+    text: "Train AI on viral genomes to forecast which mutations could trigger the next pandemic — and simulate counter-strategies."
+    themes: [pandemic, forecasting]
+  - id: ch6-neurobiology-simulation
+    title: Neurobiology Simulation
+    text: "Propose AI models that simulate consciousness as an emergent property of neural oscillations."
+    themes: [consciousness, neural]
+  - id: ch6-photosynthesis-upgrade
+    title: Photosynthesis Upgrade
+    text: "How might AI redesign chlorophyll to make photosynthesis more efficient for food security under climate stress?"
+    themes: [photosynthesis, food-security]
+  - id: ch6-interspecies-translation
+    title: Interspecies Translation
+    text: "Use AI to translate the communication of whales, bees, or fungi into human-understandable knowledge."
+    themes: [interspecies, translation]
+  - id: ch6-bioinformatics-of-extinction
+    title: Bioinformatics of Extinction
+    text: "Predict which species are most at risk by modeling genomic diversity as an indicator of adaptability."
+    themes: [extinction, genomics]
+  - id: ch6-microbiome-architect
+    title: Microbiome Architect
+    text: "Develop AI-guided probiotics that adapt dynamically to each human's gut ecosystem."
+    themes: [microbiome, personalized]
+  - id: ch6-planetary-terraforming
+    title: Planetary Terraforming
+    text: "Imagine organisms bioengineered by AI to prepare Mars or Europa for human settlement."
+    themes: [terraforming, off-world]
+  - id: ch6-synthetic-immortality
+    title: Synthetic Immortality
+    text: "Speculate on AI-designed cells that indefinitely repair their own DNA — what ethical dilemmas follow?"
+    themes: [immortality, ethics]

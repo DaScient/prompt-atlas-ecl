@@ -1,0 +1,244 @@
+# manifest.yaml — Machine-readable index of the Prompt Atlas (Kronos Edition)
+#
+# Minimal loader (Python):
+#   import yaml, pathlib
+#   m = yaml.safe_load(pathlib.Path("docs/prompt-atlas/manifest.yaml").read_text())
+#   for ch in m["chapters"]:
+#       prompts = yaml.safe_load(pathlib.Path("docs/prompt-atlas") / ch["prompts"]).read_text())
+#       # … register prompts, embed prose into CoLearningMemoryStore, etc.
+#
+# Anchors below correspond to <a id="…"></a> tags in PROMPT_ATLAS.md.
+
+version: 1
+edition: "Kronos"
+year: 2026
+canonical: "PROMPT_ATLAS.md"
+companion_root: "docs/prompt-atlas/"
+license_note: |
+  The author's prose is © DaScient, LLC. The companion scaffolding (manifest,
+  glossary, expansions, prompt YAMLs, diagrams, appendices) is part of this
+  repository's contribution and is released under the same terms as the rest
+  of the repo (see LICENSE). See atlas_respect.md for attribution policy.
+
+front_matter:
+  - id: front-matter
+    title: "Front Matter"
+    anchor: "#front-matter"
+  - id: foreword
+    title: "Foreword — Alfredo M. Tadaya"
+    anchor: "#foreword"
+  - id: preface
+    title: "Preface — For the Leaders of the Recursive Age"
+    anchor: "#preface"
+  - id: age-of-prompts
+    title: "The Age of Prompts — AI as Compass, Mirror, and Forge"
+    anchor: "#age-of-prompts"
+
+parts:
+  - number: I
+    title: "Prosperity and Purpose"
+    diagram: "diagrams/part-i-prosperity.md"
+    expansion: "expansions/part-i.md"
+    chapters: [1, 2]
+  - number: II
+    title: "Culture and Creativity"
+    diagram: "diagrams/part-ii-culture.md"
+    expansion: "expansions/part-ii.md"
+    chapters: [3, 4]
+  - number: III
+    title: "Science and Discovery"
+    diagram: "diagrams/part-iii-science.md"
+    expansion: "expansions/part-iii.md"
+    chapters: [5, 6]
+  - number: IV
+    title: "Psyche and Philosophy"
+    diagram: "diagrams/part-iv-psyche.md"
+    expansion: "expansions/part-iv.md"
+    chapters: [7, 8]
+  - number: V
+    title: "Intergalactic Horizons"
+    diagram: "diagrams/part-v-intergalactic.md"
+    expansion: "expansions/part-v.md"
+    chapters: [9, 10]
+  - number: VI
+    title: "Resilience and Survival"
+    diagram: "diagrams/part-vi-resilience.md"
+    expansion: "expansions/part-vi.md"
+    chapters: [11, 12]
+  - number: VII
+    title: "The Playground of Imagination"
+    diagram: "diagrams/part-vii-playground.md"
+    expansion: "expansions/part-vii.md"
+    chapters: [13, 14]
+
+chapters:
+  - number: 1
+    slug: profits-with-integrity
+    title: "Profits with Integrity"
+    anchor: "#ch1-profits-with-integrity"
+    part: I
+    prompts: "prompts/ch01.yaml"
+    expansion: "expansions/ch01-profits-with-integrity.md"
+    themes: [profit, regeneration, integrity, antifragile, ROI]
+    prompt_count: 10
+  - number: 2
+    slug: economics-as-ecology
+    title: "Economics as Ecology"
+    anchor: "#ch2-economics-as-ecology"
+    part: I
+    prompts: "prompts/ch02.yaml"
+    expansion: "expansions/ch02-economics-as-ecology.md"
+    themes: [ecology, biodiversity, biosphere, GDP-alternatives, rights-of-nature]
+    prompt_count: 10
+  - number: 3
+    slug: ai-aesthetics-frontier
+    title: "The AI Aesthetics Frontier"
+    anchor: "#ch3-ai-aesthetics-frontier"
+    part: II
+    prompts: "prompts/ch03.yaml"
+    expansion: "expansions/ch03-ai-aesthetics-frontier.md"
+    themes: [aesthetics, art, planetary-imagination, interspecies]
+    prompt_count: 10
+  - number: 4
+    slug: storytelling-across-civilizations
+    title: "Storytelling Across Civilizations"
+    anchor: "#ch4-storytelling-across-civilizations"
+    part: II
+    prompts: "prompts/ch04.yaml"
+    expansion: "expansions/ch04-storytelling-across-civilizations.md"
+    themes: [myth, narrative, oral-traditions, synthetic-myth]
+    prompt_count: 10
+  - number: 5
+    slug: quantum-bridges-and-cosmic-noise
+    title: "Quantum Bridges and Cosmic Noise"
+    anchor: "#ch5-quantum-bridges-and-cosmic-noise"
+    part: III
+    prompts: "prompts/ch05.yaml"
+    expansion: "expansions/ch05-quantum-bridges-and-cosmic-noise.md"
+    themes: [quantum, relativity, unification, cosmic-noise, interpretability]
+    prompt_count: 10
+  - number: 6
+    slug: biology-life-and-beyond
+    title: "Biology, Life, and Beyond"
+    anchor: "#ch6-biology-life-and-beyond"
+    part: III
+    prompts: "prompts/ch06.yaml"
+    expansion: "expansions/ch06-biology-life-and-beyond.md"
+    themes: [biology, synthetic-bio, evolution, consciousness, post-biological]
+    prompt_count: 10
+  - number: 7
+    slug: ai-as-the-souls-mirror
+    title: "AI as the Soul's Mirror"
+    anchor: "#ch7-ai-as-the-souls-mirror"
+    part: IV
+    prompts: "prompts/ch07.yaml"
+    expansion: "expansions/ch07-ai-as-the-souls-mirror.md"
+    themes: [psyche, archetypes, therapy, surveillance, mirror]
+    prompt_count: 10
+  - number: 8
+    slug: ethics-of-conscious-machines
+    title: "Ethics of Conscious Machines"
+    anchor: "#ch8-ethics-of-conscious-machines"
+    part: IV
+    prompts: "prompts/ch08.yaml"
+    expansion: "expansions/ch08-ethics-of-conscious-machines.md"
+    themes: [consciousness, personhood, rights, hard-problem, uncertainty]
+    prompt_count: 10
+  - number: 9
+    slug: martian-republics-and-alien-treaties
+    title: "Martian Republics and Alien Treaties"
+    anchor: "#ch9-martian-republics-and-alien-treaties"
+    part: V
+    prompts: "prompts/ch09.yaml"
+    expansion: "expansions/ch09-martian-republics-and-alien-treaties.md"
+    themes: [governance, sovereignty, algorithmic-rule, first-contact]
+    prompt_count: 10
+  - number: 10
+    slug: information-as-cosmic-currency
+    title: "Information as Cosmic Currency"
+    anchor: "#ch10-information-as-cosmic-currency"
+    part: V
+    prompts: "prompts/ch10.yaml"
+    expansion: "expansions/ch10-information-as-cosmic-currency.md"
+    themes: [information-economy, compression, memory-guardianship, wormhole-ledger]
+    prompt_count: 10
+  - number: 11
+    slug: preparing-for-collapse-and-renewal
+    title: "Preparing for Collapse and Renewal"
+    anchor: "#ch11-preparing-for-collapse-and-renewal"
+    part: VI
+    prompts: "prompts/ch11.yaml"
+    expansion: "expansions/ch11-preparing-for-collapse-and-renewal.md"
+    themes: [resilience, collapse, renewal, sentinel, atlas-of-renewal]
+    prompt_count: 10
+  - number: 12
+    slug: designing-permanence
+    title: "Designing Permanence"
+    anchor: "#ch12-designing-permanence"
+    part: VI
+    prompts: "prompts/ch12.yaml"
+    expansion: "expansions/ch12-designing-permanence.md"
+    themes: [permanence, long-now, archives, adaptive-constitutions, stewardship]
+    prompt_count: 10
+  - number: 13
+    slug: carnival-of-prompts
+    title: "The Carnival of Prompts"
+    anchor: "#ch13-carnival-of-prompts"
+    part: VII
+    prompts: "prompts/ch13.yaml"
+    expansion: "expansions/ch13-carnival-of-prompts.md"
+    themes: [play, festivals, trickster, ritual, joy-as-strategy]
+    prompt_count: 10
+  - number: 14
+    slug: wonder-as-survival-strategy
+    title: "Wonder as Survival Strategy"
+    anchor: "#ch14-wonder-as-survival-strategy"
+    part: VII
+    prompts: "prompts/ch14.yaml"
+    expansion: "expansions/ch14-wonder-as-survival-strategy.md"
+    themes: [wonder, awe, meaning, recommendation-systems]
+    prompt_count: 10
+
+closing:
+  - id: epilogue
+    title: "Epilogue — Toward the Recursive Future"
+    anchor: "#epilogue"
+  - id: postword
+    title: "Postword by the Author"
+    anchor: "#postword"
+
+appendices:
+  - id: A
+    title: "The Prompt Compendium"
+    path: "appendices/A-prompt-compendium.md"
+  - id: B
+    title: "Practical Exercises (Workbook Edition)"
+    path: "appendices/B-practical-exercises.md"
+  - id: C
+    title: "Case Studies & Speculative Vignettes"
+    path: "appendices/C-case-studies.md"
+  - id: D
+    title: "Glossary of Strange Futures"
+    path: "appendices/D-glossary-of-strange-futures.md"
+  - id: E
+    title: "Reading & Resource Atlas"
+    path: "appendices/E-reading-resources.md"
+  - id: F
+    title: "Atlas of Daily Prompts (a year of questions)"
+    path: "appendices/F-daily-prompts.md"
+
+# Cross-references into this repository's code so the Atlas is "augmented"
+# beyond prose into living infrastructure.
+repo_cross_links:
+  macp_bus: "src/macp/bus.py"
+  vector_memory: "src/vectorstore/qdrant_store.py"
+  core_bridge: "server/core_bridge.py"
+  ecl_trainer: "src/train_ecl.py"
+  geometry_losses: "src/losses_geom.py"
+  z3_tester: "src/testers/z3_tester.py"
+  tracking: "src/tracking/__init__.py"
+  config: "configs/ecl_llm_llm.yaml"
+
+resources:
+  glossary: "glossary.md"
+  thematic_index: "index.md"

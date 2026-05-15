@@ -1,0 +1,45 @@
+# Chapter 3 — The AI Aesthetics Frontier
+chapter: 3
+slug: ai-aesthetics-frontier
+anchor: "../../PROMPT_ATLAS.md#ch3-ai-aesthetics-frontier"
+prompts:
+  - id: ch3-zero-gravity-arts
+    title: Zero-Gravity Arts
+    text: "Invent a performance art designed only for weightless environments — what movements, music, and visuals emerge?"
+    themes: [zero-g, performance]
+  - id: ch3-planetary-architecture
+    title: Planetary Architecture
+    text: "Design a city where buildings shift their colors and textures daily in response to collective human emotions."
+    themes: [architecture, affective]
+  - id: ch3-mythic-ai
+    title: Mythic AI
+    text: "Write a myth where AI is not a machine but a trickster god teaching humanity lessons through riddles."
+    themes: [mythic-ai, trickster]
+  - id: ch3-cosmic-cuisine
+    title: Cosmic Cuisine
+    text: "Imagine meals crafted in a world without plants, where fungi, algae, and minerals define taste."
+    themes: [food, off-world]
+  - id: ch3-adaptive-murals
+    title: Adaptive Murals
+    text: "Design public art that responds in real time to weather, air quality, and human voices."
+    themes: [public-art, sensors]
+  - id: ch3-rituals-of-connection
+    title: Rituals of Connection
+    text: "Invent a festival celebrated by both humans and AIs, with shared rituals that create genuine reciprocity."
+    themes: [ritual, reciprocity]
+  - id: ch3-time-dilation-music
+    title: Time-Dilation Music
+    text: "Compose a piece of music that would sound coherent to beings experiencing time at radically different speeds."
+    themes: [music, relativity]
+  - id: ch3-dream-weaving
+    title: Dream Weaving
+    text: "Create a storytelling medium where human dreams are visualized and shared across cultures via AI interpretation."
+    themes: [dreams, cross-cultural]
+  - id: ch3-memory-architecture
+    title: Memory Architecture
+    text: "Design a library that grows and reshapes itself like a forest, with books that bloom and fade according to relevance."
+    themes: [archives, living-systems]
+  - id: ch3-interspecies-theater
+    title: Interspecies Theater
+    text: "Stage a play co-written by humans and whales, mediated through AI translation of song and gesture."
+    themes: [interspecies, theater]
