@@ -76,6 +76,10 @@
 
 <br>
 
+> 📖 **The Prompt Atlas — Kronos Edition** is now bundled with this repository. Read the canonical text in [`PROMPT_ATLAS.md`](PROMPT_ATLAS.md), the companion expansions, manifest, glossary, prompt library, diagrams, and appendices in [`docs/prompt-atlas/`](docs/prompt-atlas/README.md).
+
+<br>
+
 ---
 
 <br>
