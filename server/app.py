@@ -253,12 +253,22 @@ async def stream(websocket: WebSocket, run_id: str, x_api_key: Optional[str] = Q
 
     Auth is via the ``x_api_key`` query parameter because browsers can't
     set custom headers on the initial WebSocket handshake. The check
-    mirrors the HTTP ``get_auth`` dependency.
+    mirrors the HTTP ``get_auth`` dependency, and connection attempts
+    are run through the same per-user rate limiter as HTTP requests so a
+    malicious client can't brute-force keys via rapid WS reconnects.
     """
     if not x_api_key or x_api_key not in API_KEYS:
         await websocket.close(code=4401)  # 4xxx = application close
         return
     auth = API_KEYS[x_api_key]
+
+    # Apply the same per-user rate limit used for HTTP routes. Going over
+    # the limit closes the connection with code 4429 ("too many requests").
+    try:
+        rate_limit(auth["user_id"], auth["rate_limit"])
+    except HTTPException:
+        await websocket.close(code=4429)
+        return
 
     record = RUN_STORE.get(run_id)
     if record is None or record.user_id != auth["user_id"]:

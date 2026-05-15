@@ -136,6 +136,12 @@ class SQLRunStore:
                 try:
                     return json.loads(value)
                 except ValueError:
+                    logger.warning(
+                        "SQLRunStore: failed to decode JSON column for run %s; "
+                        "returning default. Raw value: %r",
+                        run_id,
+                        value,
+                    )
                     return default
             return value if value is not None else default
 
