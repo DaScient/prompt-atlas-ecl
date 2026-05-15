@@ -488,6 +488,48 @@ PAE_TRACKING=1 python -m src.train_ecl
 
 <br>
 
+## 🗄️ Phase 3 -- Persistent Runs & Live Trace Streaming
+
+Phase 3 hardens the API layer so runs survive process restarts and clients can *watch* a run unfold in real time.
+
+### `RunStore` -- pluggable persistence (`src/runstore/`)
+
+The API used to keep all run state in a process-global `dict`. That works for local demos but loses everything on restart and can't be shared across worker processes. Phase 3 introduces a small `RunStore` protocol with two implementations, following the same optional-dependency contract as Phases 1–2:
+
+- **`InMemoryRunStore`** -- threadsafe dict-backed default; behaviorally identical to the old `RUNS` global.
+- **`SQLRunStore`** -- SQLAlchemy-backed; activates when `PAE_DATABASE_URL` is set (sqlite, Postgres, MySQL, ...). Falls back gracefully to in-memory if SQLAlchemy isn't installed or the URL fails to open.
+
+```bash
+# Local file-backed sqlite (zero setup):
+PAE_DATABASE_URL=sqlite:///./pae_runs.db uvicorn server.app:app --reload
+
+# Postgres in production:
+PAE_DATABASE_URL=postgresql+psycopg://user:pass@db:5432/pae uvicorn server.app:app
+```
+
+Schema is intentionally minimal -- `pae_runs` (one row per run with brief/config/state JSON) and `pae_run_steps` (append-only trace keyed by `(run_id, t)`) -- so migrations are nearly free.
+
+### Live trace WebSocket (`src/streaming/`)
+
+`/runs/{run_id}/stream` is a WebSocket endpoint that pushes each new ECL step the moment it's appended:
+
+```js
+const ws = new WebSocket("ws://localhost:8000/runs/<run_id>/stream?x_api_key=demo-free-key");
+ws.onmessage = (msg) => {
+  const event = JSON.parse(msg.data);
+  // event.type === "snapshot" | "step"
+  // step events carry { t, spec, tests, e_star, state }
+};
+```
+
+Backed by an in-process pub/sub `StreamHub` with bounded per-subscriber queues -- a stalled WebSocket will lose events rather than backpressure the API hot path. Auth is via the `x_api_key` query parameter (browsers can't set custom headers on the initial WS handshake), and ownership is enforced exactly as for the HTTP endpoints.
+
+<br>
+
+---
+
+<br>
+
 ## 🌐 API Reference
 
 <br>
@@ -498,6 +540,7 @@ PAE_TRACKING=1 python -m src.train_ecl
 | 🏃 | `/runs` | `POST` | Create a new entanglement run with a brief | 🔑 |
 | ⏭️ | `/runs/{run_id}/step` | `POST` | Advance the ECL state by one tick | 🔑 |
 | 📜 | `/runs/{run_id}/trace` | `GET` | Retrieve the full trace history for a run | 🔑 |
+| 📡 | `/runs/{run_id}/stream` | `WS` | WebSocket stream of new steps as they arrive *(Phase 3)* | 🔑 |
 | 📦 | `/prompt-packs` | `GET` | List all available prompt archetypes | -- |
 | 💰 | `/pricing` | `GET` | API pricing tiers (mock data for integration) | -- |
 

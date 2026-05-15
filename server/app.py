@@ -1,9 +1,19 @@
+import asyncio
+import json
 import os
 import time
 import uuid
 from typing import Optional, Dict, Any, List
 
-from fastapi import FastAPI, Depends, Header, HTTPException
+from fastapi import (
+    FastAPI,
+    Depends,
+    Header,
+    HTTPException,
+    Query,
+    WebSocket,
+    WebSocketDisconnect,
+)
 from pydantic import BaseModel, Field
 from starlette.middleware.cors import CORSMiddleware
 
@@ -14,6 +24,13 @@ except Exception:
     torch = None
 
 from server.core_bridge import Core
+from src.runstore import (
+    RunRecord,
+    RunStore,
+    StepRecord,
+    get_default_runstore,
+)
+from src.streaming import StreamHub, get_default_hub
 
 # ------------------------- device selection -------------------------
 def auto_device() -> str:
@@ -30,8 +47,15 @@ def auto_device() -> str:
             pass
     return "cpu"
 
-# ------------------------- in-memory stores (swap to DB later) -------------------------
-RUNS: Dict[str, Dict[str, Any]] = {}
+# ------------------------- stores -------------------------
+# Phase 3 — runs are persisted via the RunStore protocol. The default
+# backend is in-memory (identical observable behavior to the old `RUNS`
+# dict). Set `PAE_DATABASE_URL` (any SQLAlchemy URL: sqlite, postgres,
+# ...) to enable durable storage.
+RUN_STORE: RunStore = get_default_runstore()
+
+# Per-process pub/sub hub used by the `/runs/{id}/stream` WebSocket.
+STREAM_HUB: StreamHub = get_default_hub()
 
 API_KEYS = {
     "demo-free-key": {"user_id": "u_demo", "plan": "free", "rate_limit": 120},    # req/hour
@@ -134,42 +158,65 @@ def create_run(payload: RunCreate, auth=Depends(get_auth)):
     except Exception:
         state_len = int(os.getenv("PAE_STATE_DIM", "64"))
 
-    RUNS[run_id] = {
-        "user_id": user_id,
-        "plan": auth["plan"],
-        "brief": payload.brief.model_dump(),
-        "prompt_pack_id": payload.prompt_pack_id,
-        "config": payload.config,
-        "t": 0,
-        "state": [0.0] * state_len,
-        "trace": [],
-    }
+    RUN_STORE.create(
+        RunRecord(
+            run_id=run_id,
+            user_id=user_id,
+            plan=auth["plan"],
+            brief=payload.brief.model_dump(),
+            prompt_pack_id=payload.prompt_pack_id,
+            config=payload.config,
+            t=0,
+            state=[0.0] * state_len,
+            trace=[],
+        )
+    )
     return {"run_id": run_id}
 
 @app.post("/runs/{run_id}/step", response_model=StepResult)
-def step(run_id: str, auth=Depends(get_auth)):
+async def step(run_id: str, auth=Depends(get_auth)):
     user_id = auth["user_id"]
     rate_limit(user_id, auth["rate_limit"])
 
-    if run_id not in RUNS or RUNS[run_id]["user_id"] != user_id:
+    record = RUN_STORE.get(run_id)
+    if record is None or record.user_id != user_id:
         raise HTTPException(status_code=404, detail="Run not found")
     if CORE is None:
         raise HTTPException(status_code=500, detail="Core not initialized")
 
-    r = RUNS[run_id]
-    out = CORE.step(S_list=r["state"])  # advances state, returns spec/tests/e_star
+    # CORE.step is CPU-bound + sync; run it in a worker thread so we
+    # don't block the event loop while still being callable from an
+    # async handler (which is what we need to await STREAM_HUB.publish
+    # on the same loop the WebSocket subscribers live on).
+    out = await asyncio.to_thread(CORE.step, record.state)
     spec, tests, e_star, s = out["spec"], out["tests"], out["e_star"], out["state"]
 
-    r["t"] += 1
-    r["state"] = s
-    r["trace"].append({"t": r["t"], "spec": spec, "tests": tests, "e_star": e_star})
+    new_t = record.t + 1
+    RUN_STORE.update_state(run_id, t=new_t, state=s)
+    RUN_STORE.append_step(
+        run_id,
+        StepRecord(t=new_t, spec=spec, tests=tests, e_star=e_star),
+    )
     CORE.remember_step(
-        run_id=run_id, step=r["t"], state=s, e_star=e_star, spec=spec, tests=tests,
+        run_id=run_id, step=new_t, state=s, e_star=e_star, spec=spec, tests=tests,
+    )
+
+    # Fan the step out to any live WebSocket subscribers on this loop.
+    await STREAM_HUB.publish(
+        run_id,
+        {
+            "run_id": run_id,
+            "t": new_t,
+            "spec": spec,
+            "tests": tests,
+            "e_star": e_star,
+            "state": s,
+        },
     )
 
     return StepResult(
         run_id=run_id,
-        t=r["t"],
+        t=new_t,
         spec_json=spec,
         tests_json=tests,
         e_star=e_star,
@@ -181,8 +228,62 @@ def trace(run_id: str, auth=Depends(get_auth)):
     user_id = auth["user_id"]
     rate_limit(user_id, auth["rate_limit"])
 
-    if run_id not in RUNS or RUNS[run_id]["user_id"] != user_id:
+    record = RUN_STORE.get(run_id)
+    if record is None or record.user_id != user_id:
         raise HTTPException(status_code=404, detail="Run not found")
 
-    data = {k: v for k, v in RUNS[run_id].items() if k != "user_id"}
+    data = {
+        "plan": record.plan,
+        "brief": record.brief,
+        "prompt_pack_id": record.prompt_pack_id,
+        "config": record.config,
+        "t": record.t,
+        "state": record.state,
+        "trace": [
+            {"t": st.t, "spec": st.spec, "tests": st.tests, "e_star": st.e_star}
+            for st in record.trace
+        ],
+    }
     return {"run": data}
+
+
+@app.websocket("/runs/{run_id}/stream")
+async def stream(websocket: WebSocket, run_id: str, x_api_key: Optional[str] = Query(default=None)):
+    """Push each new ECL step for ``run_id`` to the WebSocket client.
+
+    Auth is via the ``x_api_key`` query parameter because browsers can't
+    set custom headers on the initial WebSocket handshake. The check
+    mirrors the HTTP ``get_auth`` dependency.
+    """
+    if not x_api_key or x_api_key not in API_KEYS:
+        await websocket.close(code=4401)  # 4xxx = application close
+        return
+    auth = API_KEYS[x_api_key]
+
+    record = RUN_STORE.get(run_id)
+    if record is None or record.user_id != auth["user_id"]:
+        await websocket.close(code=4404)
+        return
+
+    await websocket.accept()
+    try:
+        async with STREAM_HUB.subscribe(run_id) as queue:
+            # Send an initial snapshot so reconnecting clients catch up
+            # without waiting for the next step.
+            await websocket.send_text(
+                json.dumps(
+                    {
+                        "type": "snapshot",
+                        "run_id": run_id,
+                        "t": record.t,
+                        "trace_len": len(record.trace),
+                    }
+                )
+            )
+            while True:
+                event = await queue.get()
+                await websocket.send_text(
+                    json.dumps({"type": "step", **event})
+                )
+    except WebSocketDisconnect:
+        return
