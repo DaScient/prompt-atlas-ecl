@@ -193,7 +193,9 @@ async def step(run_id: str, auth=Depends(get_auth)):
     # don't block the event loop while still being callable from an
     # async handler (which is what we need to await STREAM_HUB.publish
     # on the same loop the WebSocket subscribers live on).
-    out = await asyncio.to_thread(CORE.step, record.state)
+    # Phase 5: pass the brief in so the optional Orchestrator path can
+    # consume it. The torch fallback inside Core.step ignores it.
+    out = await asyncio.to_thread(CORE.step, record.state, brief=record.brief)
     spec, tests, e_star, s = out["spec"], out["tests"], out["e_star"], out["state"]
 
     new_t = record.t + 1

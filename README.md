@@ -600,6 +600,77 @@ The landing page accepts an API key (stored only in `sessionStorage` for the tab
 
 <br>
 
+## 🤖 Phase 5 -- Dual-LLM, Real Embeddings & Multi-Agent Orchestration
+
+Phase 5 promotes the engine from "stub dynamics" to a real co-learning loop driven by configurable LLMs, real embeddings, and a multi-agent pipeline. Like every other extension module, everything is **optional** -- the deterministic / hashed fallbacks keep the test suite and offline demos running with no API keys, no network, and no extra installs.
+
+### LLM providers (`src/llm/`)
+
+| Provider | When it activates | Dependencies |
+|---|---|---|
+| `DeterministicProvider` | Always available | none -- pure-Python, hash-derived stable output |
+| `OpenAIProvider` | `OPENAI_API_KEY` set | `pip install openai` |
+| `AnthropicProvider` | `ANTHROPIC_API_KEY` set | `pip install anthropic` |
+| `DualLLMProvider` | Both keys set | both SDKs |
+
+Select via `PAE_LLM_PROVIDER=` (`deterministic` / `openai` / `anthropic` / `dual`). Missing optional deps cleanly fall back to the deterministic provider so the API never crashes on misconfiguration.
+
+`DualLLMProvider` is the headline feature -- it fans one prompt out to both real providers in parallel, picks the higher-confidence response, and records a `divergence` metric on `meta.divergence` so disagreements surface in the dashboard.
+
+### Embedding streams (`src/embeddings/`)
+
+| Provider | When it activates | Dependencies |
+|---|---|---|
+| `HashingEmbeddings` | Always available | none -- signed-hash n-gram, à la `HashingVectorizer` |
+| `OpenAIEmbeddings` | `OPENAI_API_KEY` set | `pip install openai` |
+| `SentenceTransformersEmbeddings` | Explicit selection | `pip install sentence-transformers` |
+
+Select via `PAE_EMBEDDINGS_PROVIDER=` (`hashing` / `openai` / `sentence-transformers`). The hashing backend is a real technique, not a stub -- cosine similarity is meaningfully higher for related strings than unrelated ones, which is enough to drive the orchestrator's coherence-based E★ proxy.
+
+### Multi-agent orchestration (`src/agents/`)
+
+```
+brief
+   │
+   ▼
+┌──────────────┐         ┌──────────────┐         ┌──────────────┐
+│ WriterAgent  │ ──spec─▶│ TesterAgent  │ ──tests│ EthicsAgent  │
+└──────────────┘         └──────────────┘         └──────────────┘
+       │                        │                        │
+       └──────────────────┬─────┴────────────────────────┘
+                          ▼
+              embed(spec) + embed(tests) + embed(ethics)
+                          │
+              cosine(spec, tests) → coherence
+              ethics.verdict     → bonus / penalty
+              prev_state ⨯ 0.5 + centroid ⨯ 0.5 → new state
+                          │
+                          ▼
+              { spec, tests, ethics, e_star, state, agents, divergence }
+```
+
+Each agent uses the same `LLMProvider`, parses the response (handling fenced code blocks, bare JSON, and prose-wrapped JSON), and falls back to a sensible default shape if the model returns garbage. The orchestrator computes the new latent state from a centroid of the three agent embeddings, blended 50/50 with the previous state for genuine co-learning memory across steps.
+
+### Activation
+
+```bash
+# Run with real LLMs:
+export PAE_LLM=1
+export PAE_LLM_PROVIDER=dual          # or openai / anthropic / deterministic
+export OPENAI_API_KEY=sk-...
+export ANTHROPIC_API_KEY=sk-ant-...
+export PAE_EMBEDDINGS_PROVIDER=openai  # or hashing / sentence-transformers
+uvicorn server.app:app --reload
+```
+
+`Core.step` now accepts the run's `brief` and, when the orchestrator is active, delegates to it -- emitting `ethics`, `agents`, and `divergence` keys on the step result alongside the usual `spec` / `tests` / `e_star` / `state`. Without `PAE_LLM=1` the legacy torch stepper runs unchanged, so existing clients see no behavioural diff.
+
+<br>
+
+---
+
+<br>
+
 ## 🧩 Key Concepts -- The Language of Entanglement
 
 <br>
@@ -944,24 +1015,24 @@ Copy `.env.example` to `.env` and configure:
 <br>
 
 ```
-  v0.2.0 ★ CURRENT                v0.3.x                    v0.4.x
+  v0.2.0                          v0.3.x                    v0.4.x
   ═══════════════╦═══════════════════╦══════════════════════════╦═══════
                  ║                   ║                          ║
-  ✅ ECL Core    ║  📦 Postgres ORM  ║  🎨 Next.js Dashboard    ║
-  ✅ FastAPI API ║  📦 Persistent    ║  📊 E-Star Visualization ║
-  ✅ Auth + Rate ║     Runs          ║  📈 Latent Drift Charts  ║
-  ✅ 5 Extension ║  📦 Migration     ║  🔄 WebSocket Streaming  ║
+  ✅ ECL Core    ║  ✅ Postgres ORM  ║  ✅ Dashboard            ║
+  ✅ FastAPI API ║  ✅ Persistent    ║  ✅ E-Star Visualization ║
+  ✅ Auth + Rate ║     Runs          ║  ✅ Latent Drift Charts  ║
+  ✅ 5 Extension ║  ✅ Migration     ║  ✅ WebSocket Streaming  ║
      Modules     ║     Framework     ║                          ║
                  ║                   ║                          ║
   ═══════════════╩═══════════════════╩══════════════════════════╩═══════
 
-       v0.5.x                                   v1.0.x
+       v0.5.x ★ CURRENT                          v1.0.x
   ═════════════════════════════╦════════════════════════════════════════
                                ║
-  🤖 Dual-LLM Integration     ║  🏛️ Prompt Atlas Studio
+  ✅ Dual-LLM Integration      ║  🏛️ Prompt Atlas Studio
      (OpenAI + Anthropic)      ║  🔌 Plugin Ecosystem
-  🧪 Real Embedding Streams    ║  📚 Research-Grade Documentation
-  📡 Multi-Agent Orchestration ║  🌍 Community Prompt Registry
+  ✅ Real Embedding Streams    ║  📚 Research-Grade Documentation
+  ✅ Multi-Agent Orchestration ║  🌍 Community Prompt Registry
                                ║  🎓 Academic Paper + Benchmarks
   ═════════════════════════════╩════════════════════════════════════════
 ```
