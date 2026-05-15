@@ -168,6 +168,11 @@ class SQLRunStore:
                     tests=_coerce_json(sr["tests_json"], []),
                     e_star=float(sr["e_star"]),
                     state=(
+                        # ``.get()`` (rather than ``[]``) is intentional:
+                        # on a database that was created under Phase 3
+                        # the ``state_json`` column doesn't exist yet,
+                        # and tolerating that lets the Phase-4 code
+                        # talk to a not-yet-migrated DB without crashing.
                         list(_coerce_json(sr["state_json"], []))
                         if sr.get("state_json") is not None
                         else None

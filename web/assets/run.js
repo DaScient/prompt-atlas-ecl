@@ -1,22 +1,37 @@
 // Phase 4 dashboard — per-run view. Plots E-Star and latent drift,
 // then subscribes to the run's WebSocket for live updates.
+//
+// Security note: the API key is held in a JS variable for the lifetime
+// of the page only. We deliberately do not persist it (see
+// dashboard.js for the full rationale).
 (function () {
   "use strict";
 
-  const KEY = "pae_api_key";
+  // Defensive: reject IDs that don't look like a UUID-ish slug. This
+  // prevents weird characters from being smuggled into the API path
+  // even though encodeURIComponent already handles escaping correctly.
+  const RUN_ID_RE = /^[A-Za-z0-9_-]{1,64}$/;
+
   const params = new URLSearchParams(location.search);
   const runId = params.get("id");
-  const apiKey = sessionStorage.getItem(KEY);
 
   const labelEl = document.getElementById("run-label");
   const liveBadge = document.getElementById("m-live");
   const specEl = document.getElementById("latest-spec");
 
-  if (!runId || !apiKey) {
-    labelEl.textContent = "missing run id or API key — return to dashboard";
+  if (!runId || !RUN_ID_RE.test(runId)) {
+    labelEl.textContent = "invalid run id — return to dashboard";
     return;
   }
   labelEl.textContent = runId;
+
+  // Prompt for the API key (the dashboard intentionally doesn't share
+  // it across pages). `window.prompt` keeps the value in memory only.
+  const apiKey = (window.prompt("API key for run " + runId.slice(0, 8) + "…") || "").trim();
+  if (!apiKey) {
+    labelEl.textContent = "no API key supplied — return to dashboard";
+    return;
+  }
 
   // -------------------- chart scaffolding --------------------
   const estarCtx = document.getElementById("estar-chart");
@@ -127,7 +142,14 @@
     ws.onerror = () => setLive(false);
     ws.onmessage = (msg) => {
       let event;
-      try { event = JSON.parse(msg.data); } catch (_) { return; }
+      try {
+        event = JSON.parse(msg.data);
+      } catch (err) {
+        // Surface to the console so malformed server payloads are
+        // visible during debugging rather than silently dropped.
+        console.warn("dashboard: failed to parse WS message", err);
+        return;
+      }
       if (event.type === "snapshot") {
         // Already loaded the trace via REST; nothing to do.
         return;
@@ -135,11 +157,15 @@
       if (event.type !== "step") return;
 
       pushPoint(estarChart, 0, event.t, event.e_star);
-      const norm = l2(event.state);
-      const delta = prevState ? l2Delta(prevState, event.state) : null;
+      const stateVec = Array.isArray(event.state) ? event.state : null;
+      const norm = stateVec ? l2(stateVec) : 0;
+      const delta = stateVec && prevState ? l2Delta(prevState, stateVec) : null;
       pushPoint(driftChart, 0, event.t, norm);
       pushPoint(driftChart, 1, event.t, delta);
-      prevState = Array.isArray(event.state) ? event.state.slice() : prevState;
+      // Reset prevState to null when the server omits a state vector so
+      // the next delta reading is honestly "unknown" rather than a
+      // stale comparison against an older step.
+      prevState = stateVec ? stateVec.slice() : null;
 
       estarChart.update("none");
       driftChart.update("none");

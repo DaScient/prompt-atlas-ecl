@@ -263,6 +263,13 @@ async def stream(websocket: WebSocket, run_id: str, x_api_key: Optional[str] = Q
     mirrors the HTTP ``get_auth`` dependency, and connection attempts
     are run through the same per-user rate limiter as HTTP requests so a
     malicious client can't brute-force keys via rapid WS reconnects.
+
+    Custom WebSocket close codes used here (per RFC 6455, codes in the
+    4xxx range are application-defined):
+
+    * ``4401`` — missing / invalid API key (mirrors HTTP 401).
+    * ``4404`` — run not found or owned by another user (mirrors 404).
+    * ``4429`` — caller exceeded their rate limit (mirrors 429).
     """
     if not x_api_key or x_api_key not in API_KEYS:
         await websocket.close(code=4401)  # 4xxx = application close

@@ -95,6 +95,10 @@ def latent_drift_series(record: RunRecord) -> List[LatentDriftPoint]:
     prev_state: Optional[Sequence[float]] = None
 
     for idx, st in enumerate(record.trace):
+        # ``StepRecord.state`` is the canonical attribute (added in
+        # Phase 4) but ``getattr`` is used here so this function still
+        # works if a caller hands us a duck-typed step object from an
+        # older serialization that doesn't carry the field at all.
         state_vec = getattr(st, "state", None)
         if state_vec is None and idx == len(record.trace) - 1:
             # Fall back to the latest persisted state for the final step.
