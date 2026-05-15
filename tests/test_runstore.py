@@ -138,6 +138,51 @@ def test_sql_runstore_persists_across_instances(tmp_path):
         b.close()
 
 
+def test_list_for_user_in_memory():
+    store = InMemoryRunStore()
+    store.create(_sample_record("a"))
+    store.create(_sample_record("b"))
+    other = _sample_record("c")
+    other.user_id = "other"
+    store.create(other)
+
+    rs = store.list_for_user("u1")
+    assert {r.run_id for r in rs} == {"a", "b"}
+    assert store.list_for_user("nobody") == []
+
+
+def test_list_for_user_sql(tmp_path):
+    pytest.importorskip("sqlalchemy")
+    from src.runstore import SQLRunStore
+
+    store = SQLRunStore(f"sqlite:///{tmp_path / 'list.db'}")
+    try:
+        store.create(_sample_record("a"))
+        store.create(_sample_record("b"))
+        rs = store.list_for_user("u1")
+        assert {r.run_id for r in rs} == {"a", "b"}
+        assert store.list_for_user("nobody") == []
+    finally:
+        store.close()
+
+
+def test_step_record_with_state_roundtrips_through_sql(tmp_path):
+    pytest.importorskip("sqlalchemy")
+    from src.runstore import SQLRunStore
+
+    store = SQLRunStore(f"sqlite:///{tmp_path / 'state.db'}")
+    try:
+        rec = _sample_record("s-state")
+        rec.trace.append(
+            StepRecord(t=1, spec={}, tests=[], e_star=0.5, state=[1.0, 2.0, 3.0])
+        )
+        store.create(rec)
+        fetched = store.get("s-state")
+        assert fetched.trace[0].state == [1.0, 2.0, 3.0]
+    finally:
+        store.close()
+
+
 def test_factory_uses_sql_backend_when_url_is_set(tmp_path, monkeypatch):
     pytest.importorskip("sqlalchemy")
     from src.runstore import SQLRunStore

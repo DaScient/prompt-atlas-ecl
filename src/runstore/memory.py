@@ -27,6 +27,10 @@ class InMemoryRunStore:
         with self._lock:
             return self._runs.get(run_id)
 
+    def list_for_user(self, user_id: str) -> List[RunRecord]:
+        with self._lock:
+            return [r for r in self._runs.values() if r.user_id == user_id]
+
     def update_state(self, run_id: str, *, t: int, state: List[float]) -> None:
         with self._lock:
             rec = self._runs.get(run_id)

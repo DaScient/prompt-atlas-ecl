@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Prompt Atlas — Run Dashboard</title>
+  <link rel="stylesheet" href="/dashboard/assets/dashboard.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>🌌 Run Dashboard</h1>
+    <p class="tagline">
+      <a href="/dashboard/">← all runs</a> · <span id="run-label">…</span>
+    </p>
+  </header>
+
+  <main>
+    <section class="card summary">
+      <div><span class="label">Steps</span><span id="m-steps">—</span></div>
+      <div><span class="label">Latest E★</span><span id="m-latest">—</span></div>
+      <div><span class="label">Mean E★</span><span id="m-mean">—</span></div>
+      <div><span class="label">‖state‖</span><span id="m-norm">—</span></div>
+      <div><span class="label">Mean drift</span><span id="m-drift">—</span></div>
+      <div><span class="label">Live</span><span id="m-live" class="badge">offline</span></div>
+    </section>
+
+    <section class="card">
+      <h2>E-Star trajectory</h2>
+      <p class="muted">Per-step entanglement certificate proxy. Higher is better.</p>
+      <canvas id="estar-chart" height="120"></canvas>
+    </section>
+
+    <section class="card">
+      <h2>Latent drift</h2>
+      <p class="muted">
+        <b>‖state‖</b> = L2 magnitude of the latent state. <b>Δ</b> = L2
+        distance between consecutive steps (gap on step 1 because there's
+        no previous state).
+      </p>
+      <canvas id="drift-chart" height="120"></canvas>
+    </section>
+
+    <section class="card">
+      <h2>Latest spec</h2>
+      <pre id="latest-spec" class="codeblock">—</pre>
+    </section>
+  </main>
+
+  <footer>
+    <small>Phase 4 dashboard · served by FastAPI · charts by Chart.js</small>
+  </footer>
+
+  <script src="/dashboard/assets/run.js"></script>
+</body>
+</html>

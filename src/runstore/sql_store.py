@@ -82,6 +82,12 @@ class SQLRunStore:
             Column("spec_json", JSON, nullable=False),
             Column("tests_json", JSON, nullable=False),
             Column("e_star", Float, nullable=False),
+            # Phase 4: optional per-step latent state. Nullable so legacy
+            # rows from Phase 3 deserialize cleanly. SQLAlchemy's
+            # ``create_all`` adds the column for fresh DBs; on a pre-Phase-4
+            # database the column simply won't exist and the SELECT below
+            # tolerates ``KeyError`` via ``.get(...)``.
+            Column("state_json", JSON, nullable=True),
         )
 
         if create_tables:
@@ -111,6 +117,7 @@ class SQLRunStore:
                         spec_json=step.spec,
                         tests_json=step.tests,
                         e_star=step.e_star,
+                        state_json=list(step.state) if step.state is not None else None,
                     )
                 )
 
@@ -160,6 +167,11 @@ class SQLRunStore:
                     spec=_coerce_json(sr["spec_json"], {}),
                     tests=_coerce_json(sr["tests_json"], []),
                     e_star=float(sr["e_star"]),
+                    state=(
+                        list(_coerce_json(sr["state_json"], []))
+                        if sr.get("state_json") is not None
+                        else None
+                    ),
                 )
                 for sr in step_rows
             ],
@@ -173,6 +185,25 @@ class SQLRunStore:
                 .values(t=t, state_json=list(state))
             )
 
+    def list_for_user(self, user_id: str) -> List[RunRecord]:
+        # Implemented in terms of ``get`` for simplicity: a list endpoint
+        # in the dashboard fetches a few rows, not millions. If a future
+        # caller needs streaming pagination we'd switch to keyset paging.
+        from sqlalchemy import select
+
+        with self._engine.begin() as conn:
+            rows = conn.execute(
+                select(self._runs.c.run_id)
+                .where(self._runs.c.user_id == user_id)
+                .order_by(self._runs.c.run_id.asc())
+            ).all()
+        records: List[RunRecord] = []
+        for (run_id,) in rows:
+            rec = self.get(run_id)
+            if rec is not None:
+                records.append(rec)
+        return records
+
     def append_step(self, run_id: str, step: StepRecord) -> None:
         with self._lock, self._engine.begin() as conn:
             conn.execute(
@@ -182,6 +213,7 @@ class SQLRunStore:
                     spec_json=step.spec,
                     tests_json=step.tests,
                     e_star=step.e_star,
+                    state_json=list(step.state) if step.state is not None else None,
                 )
             )
 

@@ -24,6 +24,11 @@ except Exception:
     torch = None
 
 from server.core_bridge import Core
+from src.metrics import (
+    e_star_series,
+    latent_drift_series,
+    summarize_run,
+)
 from src.runstore import (
     RunRecord,
     RunStore,
@@ -195,7 +200,9 @@ async def step(run_id: str, auth=Depends(get_auth)):
     RUN_STORE.update_state(run_id, t=new_t, state=s)
     RUN_STORE.append_step(
         run_id,
-        StepRecord(t=new_t, spec=spec, tests=tests, e_star=e_star),
+        # Phase 4: persist the per-step latent state so the dashboard can
+        # render true per-step drift, not just the final state.
+        StepRecord(t=new_t, spec=spec, tests=tests, e_star=e_star, state=list(s)),
     )
     CORE.remember_step(
         run_id=run_id, step=new_t, state=s, e_star=e_star, spec=spec, tests=tests,
@@ -297,3 +304,85 @@ async def stream(websocket: WebSocket, run_id: str, x_api_key: Optional[str] = Q
                 )
     except WebSocketDisconnect:
         return
+
+
+# ------------------------- Phase 4: dashboard metrics -------------------------
+
+@app.get("/runs", response_model=dict)
+def list_runs(auth=Depends(get_auth)):
+    """List all runs owned by the caller, with at-a-glance summaries.
+
+    The dashboard's landing page uses this to render a run picker; the
+    summary fields (latest_e_star, steps) are pre-computed server-side
+    via :func:`src.metrics.summarize_run` so the browser doesn't have
+    to fetch the full trace just to render a row.
+    """
+    user_id = auth["user_id"]
+    rate_limit(user_id, auth["rate_limit"])
+
+    records = RUN_STORE.list_for_user(user_id)
+    runs = []
+    for rec in records:
+        summary = summarize_run(rec)
+        runs.append(
+            {
+                "run_id": rec.run_id,
+                "brief_goal": rec.brief.get("goal"),
+                "prompt_pack_id": rec.prompt_pack_id,
+                "t": rec.t,
+                "steps": summary.steps,
+                "latest_e_star": summary.latest_e_star,
+                "mean_e_star": summary.mean_e_star,
+            }
+        )
+    return {"runs": runs}
+
+
+@app.get("/runs/{run_id}/metrics", response_model=dict)
+def run_metrics(run_id: str, auth=Depends(get_auth)):
+    """Derived metric series for the run, ready to plot.
+
+    Returns:
+        * ``e_star``      -- list of ``{t, e_star}`` points
+        * ``drift``       -- list of ``{t, state_norm, state_delta}`` points
+        * ``summary``     -- :class:`src.metrics.RunSummary` fields
+    """
+    user_id = auth["user_id"]
+    rate_limit(user_id, auth["rate_limit"])
+
+    record = RUN_STORE.get(run_id)
+    if record is None or record.user_id != user_id:
+        raise HTTPException(status_code=404, detail="Run not found")
+
+    e_star = [{"t": p.t, "e_star": p.e_star} for p in e_star_series(record)]
+    drift = [
+        {"t": p.t, "state_norm": p.state_norm, "state_delta": p.state_delta}
+        for p in latent_drift_series(record)
+    ]
+    summary = summarize_run(record)
+
+    return {
+        "run_id": record.run_id,
+        "e_star": e_star,
+        "drift": drift,
+        "summary": {
+            "steps": summary.steps,
+            "latest_e_star": summary.latest_e_star,
+            "mean_e_star": summary.mean_e_star,
+            "final_state_norm": summary.final_state_norm,
+            "mean_state_delta": summary.mean_state_delta,
+        },
+    }
+
+
+# ------------------------- Phase 4: static dashboard -------------------------
+# The dashboard ships as plain HTML + vanilla JS (Chart.js via CDN) so it
+# adds *zero* build steps to the project. It's mounted optionally: when
+# the ``web/`` directory is missing the import simply skips the mount,
+# keeping the API-only install path working unchanged.
+
+_WEB_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "web")
+if os.path.isdir(_WEB_DIR):
+    from fastapi.staticfiles import StaticFiles
+
+    app.mount("/dashboard", StaticFiles(directory=_WEB_DIR, html=True), name="dashboard")

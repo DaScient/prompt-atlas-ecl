@@ -11,12 +11,20 @@ from typing import Any, Dict, List, Optional, Protocol, runtime_checkable
 
 @dataclass
 class StepRecord:
-    """A single ECL step appended to a run's trace."""
+    """A single ECL step appended to a run's trace.
+
+    ``state`` (Phase 4) optionally captures the *latent state* at the
+    end of the step. When populated, the metrics module can compute
+    per-step latent drift without us needing to keep a parallel store.
+    It's optional so old persisted runs without per-step state still
+    deserialize cleanly.
+    """
 
     t: int
     spec: Dict[str, Any]
     tests: List[Dict[str, Any]]
     e_star: float
+    state: Optional[List[float]] = None
 
 
 @dataclass
@@ -46,6 +54,8 @@ class RunStore(Protocol):
     def create(self, record: RunRecord) -> None: ...
 
     def get(self, run_id: str) -> Optional[RunRecord]: ...
+
+    def list_for_user(self, user_id: str) -> List[RunRecord]: ...
 
     def update_state(self, run_id: str, *, t: int, state: List[float]) -> None: ...
 

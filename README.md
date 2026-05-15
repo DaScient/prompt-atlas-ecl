@@ -530,6 +530,49 @@ Backed by an in-process pub/sub `StreamHub` with bounded per-subscriber queues -
 
 <br>
 
+## 📊 Phase 4 -- Dashboard & Visualization
+
+Phase 4 delivers the v0.4.x roadmap items: a metrics surface and a live, zero-build dashboard for visualising what the ECL core is actually doing.
+
+### Metric derivations (`src/metrics/`)
+
+Pure-Python projections over a `RunRecord`, no numpy/torch dependency:
+
+- **`e_star_series(record)`** -- `[{t, e_star}, ...]`, ready for a line chart.
+- **`latent_drift_series(record)`** -- `[{t, state_norm, state_delta}, ...]`. `state_norm` is the L2 magnitude of the latent state at step `t`; `state_delta` is `‖state_t − state_{t-1}‖`, exposing how aggressively the latent is moving. The first step has `state_delta = null` so charts can render a gap rather than a misleading zero.
+- **`summarize_run(record)`** -- at-a-glance card data: step count, latest/mean E★, final `‖state‖`, mean drift.
+
+To make per-step drift *meaningful*, `StepRecord` now carries an optional `state` field (defaults to `None` for backwards compatibility) and the API populates it on each `/step` call. The SQL backend gets a nullable `state_json` column on `pae_run_steps`; legacy Phase 3 rows continue to deserialize without complaint.
+
+### New endpoints
+
+| | Endpoint | Description |
+|:---:|:---|:---|
+| 📋 | `GET /runs` | List the caller's runs with summary fields |
+| 📊 | `GET /runs/{run_id}/metrics` | E-Star + drift series + summary, dashboard-ready |
+
+### Static dashboard (`web/`)
+
+The dashboard ships as plain HTML + vanilla JS (Chart.js via CDN). **Zero build steps, zero npm.** FastAPI mounts the directory at `/dashboard` if it exists; the mount is skipped cleanly when running an API-only install with the directory pruned away.
+
+```bash
+uvicorn server.app:app --reload
+open http://localhost:8000/dashboard/
+```
+
+The landing page accepts an API key (stored only in `sessionStorage` for the tab), lists your runs, and links to a per-run page that renders:
+
+- **E-Star trajectory** -- per-step certificate proxy.
+- **Latent drift** -- `‖state‖` and Δ over time.
+- **Latest spec** -- pretty-printed JSON, updated live.
+- **Live badge** -- the page opens the existing `/runs/{id}/stream` WebSocket and appends each new step to both charts as it arrives.
+
+<br>
+
+---
+
+<br>
+
 ## 🌐 API Reference
 
 <br>
@@ -538,9 +581,12 @@ Backed by an in-process pub/sub `StreamHub` with bounded per-subscriber queues -
 |:---:|:---|:---:|:---|:---:|
 | 💚 | `/health` | `GET` | Health check -- returns `ok` and version | -- |
 | 🏃 | `/runs` | `POST` | Create a new entanglement run with a brief | 🔑 |
+| 📋 | `/runs` | `GET` | List the caller's runs with summaries *(Phase 4)* | 🔑 |
 | ⏭️ | `/runs/{run_id}/step` | `POST` | Advance the ECL state by one tick | 🔑 |
 | 📜 | `/runs/{run_id}/trace` | `GET` | Retrieve the full trace history for a run | 🔑 |
+| 📊 | `/runs/{run_id}/metrics` | `GET` | Derived E★ / drift series + summary *(Phase 4)* | 🔑 |
 | 📡 | `/runs/{run_id}/stream` | `WS` | WebSocket stream of new steps as they arrive *(Phase 3)* | 🔑 |
+| 🎨 | `/dashboard/` | `GET` | Static dashboard UI *(Phase 4)* | -- |
 | 📦 | `/prompt-packs` | `GET` | List all available prompt archetypes | -- |
 | 💰 | `/pricing` | `GET` | API pricing tiers (mock data for integration) | -- |
 
