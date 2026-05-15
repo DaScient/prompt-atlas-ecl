@@ -671,6 +671,77 @@ uvicorn server.app:app --reload
 
 <br>
 
+## 🏛️ Phase 6 -- Plugin Ecosystem, Prompt Registry, Studio & Benchmarks
+
+Phase 6 ships the v1.0.x roadmap: the engine is now extensible from outside the repo, the four legacy prompt packs are replaced by a real on-disk registry, the dashboard gains a Studio page for browsing packs, and `scripts/bench.py` gives the project a reproducible benchmark contract.
+
+### Plugin ecosystem (`src/plugins/`)
+
+A four-namespace registry (`llm`, `embeddings`, `agent`, `tester`) that lets third-party packages add providers without touching the repo:
+
+```python
+from src.plugins import register
+
+@register("llm", "ollama")
+def make_ollama():
+    from my_ollama_provider import OllamaProvider
+    return OllamaProvider(host="http://localhost:11434")
+```
+
+The LLM and embedding factories consult the registry *after* their built-ins, so plugin providers are selectable via the same `PAE_LLM_PROVIDER` / `PAE_EMBEDDINGS_PROVIDER` env vars. Entry-point discovery (`prompt_atlas.llm`, `prompt_atlas.embeddings`, …) is **opt-in** via `PAE_PLUGINS=1` — importing arbitrary third-party code at server startup needs the operator's blessing. Failed plugin loads are logged and skipped, never raised.
+
+`GET /plugins` returns the installed extensions (namespace · name · source · meta) so the Studio can show what's available.
+
+### Community Prompt Registry (`src/registry/`, `prompts/packs/`)
+
+The hardcoded `/prompt-packs` stub is replaced by a real disk-backed registry:
+
+* Packs are YAML or JSON files matching the `PromptPack` Pydantic schema (`id`, `version`, `title`, `domain`, `tags`, `description`, `author`, `license`, `prompts[]`, `defaults`).
+* Bundled packs ship under `prompts/packs/` and preserve the legacy IDs (`myth-1`, `science-1`, `psych-1`, `purpose-1`) so existing clients keep working.
+* Operators add their own packs by pointing `PAE_PROMPT_PACKS_DIR` (`:`-separated, like `PATH`) at one or more overlay directories. Later entries override earlier ones.
+* Templates use plain `{slot}` substitution. Defaults declared on the pack fill missing slots; unknown slots raise `KeyError`. Caller args always win.
+
+New / changed API:
+
+| Method | Path | Notes |
+|---|---|---|
+| GET | `/prompt-packs?q=&domain=&tag=&limit=&offset=` | Paginated list with search/filter |
+| GET | `/prompt-packs/{id}` | Full pack document |
+| GET | `/prompt-packs/{id}/prompts/{name}` | A single template |
+| GET | `/plugins` | Installed extensions |
+
+### Prompt Atlas Studio (`web/studio.html`)
+
+A zero-build, vanilla-JS page mounted at **`/dashboard/studio.html`** that:
+
+* Lists registry packs with free-text search + domain filter.
+* Drills into a pack to inspect templates (role, inputs, body rendered verbatim via `textContent` to avoid HTML injection).
+* Links back to the runs dashboard.
+
+### Reproducible benchmarks (`scripts/bench.py`)
+
+```bash
+# Deterministic torch path
+python -m scripts.bench --steps 16 --json /tmp/bench.json
+
+# Phase 5 orchestrator + Phase 6 prompt pack
+python -m scripts.bench --llm --pack myth-1 --prompt user_story \
+    --var system_under_review="a feed-ranking service" \
+    --steps 16 --json /tmp/bench-myth.json
+```
+
+The output JSON conforms to [`docs/research/bench_result.schema.json`](docs/research/bench_result.schema.json) (`version: 1`) -- a stable contract so notebooks and papers can keep parsing results across releases. Headline metrics: `e_star_mean`, `e_star_final`, `drift_mean`, `steps_per_second`.
+
+### Research notes (`docs/research/`)
+
+New top-level home for the project's research-grade documentation -- bench schema, reading list, and citation guidance. The full academic write-up + benchmark suite are tracked here.
+
+<br>
+
+---
+
+<br>
+
 ## 🧩 Key Concepts -- The Language of Entanglement
 
 <br>
@@ -1026,14 +1097,14 @@ Copy `.env.example` to `.env` and configure:
                  ║                   ║                          ║
   ═══════════════╩═══════════════════╩══════════════════════════╩═══════
 
-       v0.5.x ★ CURRENT                          v1.0.x
+       v0.5.x                                   v1.0.x ★ CURRENT
   ═════════════════════════════╦════════════════════════════════════════
                                ║
-  ✅ Dual-LLM Integration      ║  🏛️ Prompt Atlas Studio
-     (OpenAI + Anthropic)      ║  🔌 Plugin Ecosystem
-  ✅ Real Embedding Streams    ║  📚 Research-Grade Documentation
-  ✅ Multi-Agent Orchestration ║  🌍 Community Prompt Registry
-                               ║  🎓 Academic Paper + Benchmarks
+  ✅ Dual-LLM Integration      ║  ✅ Prompt Atlas Studio
+     (OpenAI + Anthropic)      ║  ✅ Plugin Ecosystem
+  ✅ Real Embedding Streams    ║  ✅ Community Prompt Registry
+  ✅ Multi-Agent Orchestration ║  ✅ Reproducible Benchmarks
+                               ║  ✅ Research-Grade Documentation
   ═════════════════════════════╩════════════════════════════════════════
 ```
 

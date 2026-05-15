@@ -1,0 +1,40 @@
+id: purpose-1
+version: 0.1.0
+title: Profit & Purpose
+domain: purpose
+author: Prompt Atlas core
+license: MIT
+tags:
+  - ethics
+  - impact
+  - value
+description: >
+  Test whether a design creates value without extracting it from the
+  community or ecology it relies on. Inspired by the seed prompts in
+  prompts/seed_prompts_atlas.md.
+defaults:
+  community: "the surrounding community and ecology"
+prompts:
+  - name: value_flow
+    role: system
+    description: Trace where value comes from and where it goes.
+    inputs: [proposal]
+    body: |
+      For the proposal below, trace one unit of value end-to-end. Where
+      does it originate (work, attention, data, land)? Where does it
+      accumulate? Where does it leak? Does {community} end up better
+      off, neutral, or worse?
+
+      Proposal:
+      {proposal}
+  - name: extraction_check
+    role: system
+    description: Profit without extraction.
+    inputs: [proposal]
+    body: |
+      The proposal below claims to create value. Is that value taken
+      from {community}, or generated alongside it? If extractive,
+      name three concrete design changes that flip the sign.
+
+      Proposal:
+      {proposal}

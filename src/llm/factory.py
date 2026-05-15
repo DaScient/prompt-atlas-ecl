@@ -55,6 +55,11 @@ def get_default_llm(provider_name: Optional[str] = None) -> LLMProvider:
     Args:
         provider_name: explicit override; falls back to
             ``PAE_LLM_PROVIDER`` env, then to ``"deterministic"``.
+
+    Plugin providers registered under the ``llm`` namespace (see
+    :mod:`src.plugins`) are tried after the built-ins; this lets users
+    select a third-party model with the same ``PAE_LLM_PROVIDER`` env
+    var they'd use for ``openai`` or ``anthropic``.
     """
     name = (provider_name or os.getenv("PAE_LLM_PROVIDER", "deterministic")).strip().lower()
 
@@ -79,10 +84,42 @@ def get_default_llm(provider_name: Optional[str] = None) -> LLMProvider:
             return backends[0]
         return DualLLMProvider(backends)
 
+    # Phase 6 — plugin providers. We look these up *before* the
+    # "deterministic" default so a plugin named e.g. "ollama" can be
+    # selected by setting PAE_LLM_PROVIDER=ollama.
+    plugin = _try_plugin_provider(name)
+    if plugin is not None:
+        return plugin
+
     # Default — also handles "deterministic" / unknown names safely.
     if name not in {"deterministic", ""}:
         logger.info("Unknown PAE_LLM_PROVIDER=%r; using deterministic", name)
     return DeterministicProvider()
+
+
+def _try_plugin_provider(name: str) -> Optional[LLMProvider]:
+    """Look the name up in the plugin registry; return an instance or None."""
+    if not name:
+        return None
+    try:
+        from src.plugins import get_default_registry
+    except Exception:  # pragma: no cover - circular-import defence
+        return None
+    rec = get_default_registry().get("llm", name)
+    if rec is None:
+        return None
+    try:
+        instance = rec.factory()
+    except Exception as exc:
+        logger.warning("LLM plugin %s instantiation failed: %s", name, exc)
+        return None
+    if not hasattr(instance, "complete"):
+        logger.warning(
+            "LLM plugin %s returned object without .complete(); ignoring",
+            name,
+        )
+        return None
+    return instance
 
 
 def _fallback(reason: str) -> LLMProvider:

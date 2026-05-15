@@ -50,9 +50,38 @@ def get_default_embeddings(
         except Exception as exc:  # pragma: no cover
             return _fallback(f"sentence-transformers init failed: {exc}", dim=dim)
 
+    # Phase 6 — plugin embedding providers, selected by name.
+    plugin = _try_plugin_embeddings(name)
+    if plugin is not None:
+        return plugin
+
     if name not in {"hashing", ""}:
         logger.info("Unknown PAE_EMBEDDINGS_PROVIDER=%r; using hashing", name)
     return HashingEmbeddings(dim=dim)
+
+
+def _try_plugin_embeddings(name: str) -> Optional[EmbeddingProvider]:
+    if not name:
+        return None
+    try:
+        from src.plugins import get_default_registry
+    except Exception:  # pragma: no cover
+        return None
+    rec = get_default_registry().get("embeddings", name)
+    if rec is None:
+        return None
+    try:
+        instance = rec.factory()
+    except Exception as exc:
+        logger.warning("Embeddings plugin %s instantiation failed: %s", name, exc)
+        return None
+    if not hasattr(instance, "embed"):
+        logger.warning(
+            "Embeddings plugin %s returned object without .embed(); ignoring",
+            name,
+        )
+        return None
+    return instance
 
 
 __all__ = ["get_default_embeddings"]

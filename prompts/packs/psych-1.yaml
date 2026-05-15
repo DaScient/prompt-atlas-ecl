@@ -1,0 +1,38 @@
+id: psych-1
+version: 0.1.0
+title: Psychology & Self
+domain: psych
+author: Prompt Atlas core
+license: MIT
+tags:
+  - bias
+  - empathy
+  - cognition
+description: >
+  Make the cognitive biases and self-image effects of a system
+  explicit so they can be designed against rather than absorbed.
+defaults:
+  population: "the typical user"
+prompts:
+  - name: bias_audit
+    role: system
+    description: Catalogue likely cognitive biases.
+    inputs: [system_under_review]
+    body: |
+      Identify the three cognitive biases most likely to degrade
+      outcomes for {population} interacting with the system below,
+      and one design move that blunts each one.
+
+      System:
+      {system_under_review}
+  - name: empathy_pass
+    role: user
+    description: Re-read the design with empathy.
+    inputs: [system_under_review]
+    body: |
+      Read the system below as someone tired, distracted, and slightly
+      annoyed. Where does it feel cold, condescending, or coercive?
+      Quote the offending lines.
+
+      System:
+      {system_under_review}

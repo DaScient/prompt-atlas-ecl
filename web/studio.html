@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Prompt Atlas — Studio</title>
+  <link rel="stylesheet" href="/dashboard/assets/dashboard.css" />
+</head>
+<body>
+  <header>
+    <h1>🏛️ Prompt Atlas Studio</h1>
+    <p class="tagline">Community Prompt Registry · Pack browser</p>
+    <p class="muted">
+      <a href="/dashboard/">← back to runs</a>
+    </p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Search packs</h2>
+      <p class="muted">
+        Browse the bundled prompt packs and any operator-supplied
+        overlays loaded from <code>PAE_PROMPT_PACKS_DIR</code>. Click a
+        pack to inspect its templates.
+      </p>
+      <form id="search-form">
+        <input id="q" type="text" placeholder="search id / title / tags" autocomplete="off" />
+        <input id="domain" type="text" placeholder="domain (optional)" autocomplete="off" />
+        <button type="submit">Search</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Packs</h2>
+      <table id="packs-table">
+        <thead><tr><th>ID</th><th>Title</th><th>Domain</th><th>Tags</th><th>Prompts</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <p id="no-packs" class="muted" hidden>No matching packs.</p>
+    </section>
+
+    <section class="card" id="pack-detail-card" hidden>
+      <h2 id="pack-detail-title"></h2>
+      <p class="muted" id="pack-detail-meta"></p>
+      <p id="pack-detail-description"></p>
+      <h3>Templates</h3>
+      <div id="pack-detail-templates"></div>
+    </section>
+  </main>
+
+  <footer>
+    <small>Phase 6 studio · served by FastAPI</small>
+  </footer>
+
+  <script src="/dashboard/assets/studio.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+id: myth-1
+version: 0.1.0
+title: Myth & Meaning
+domain: myth
+author: Prompt Atlas core
+license: MIT
+tags:
+  - archetype
+  - narrative
+  - story
+description: >
+  Frame designs and decisions as stories. Surfaces the archetypes a
+  system implicitly invokes and the narrative a user comes away
+  telling about themselves.
+defaults:
+  audience: "the people most affected"
+prompts:
+  - name: archetype_audit
+    role: system
+    description: Identify the dominant archetype a system invokes.
+    inputs: [system_under_review]
+    body: |
+      You are a mythographer. Read the system below and name the single
+      dominant archetype it invokes for {audience} (e.g. trickster,
+      guardian, oracle). Justify in two sentences.
+
+      System:
+      {system_under_review}
+  - name: user_story
+    role: user
+    description: What story does the user tell about themselves?
+    inputs: [system_under_review]
+    body: |
+      After interacting with the system below, what one-sentence story
+      does {audience} tell about themselves? Quote it.
+
+      System:
+      {system_under_review}

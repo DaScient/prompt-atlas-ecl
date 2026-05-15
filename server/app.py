@@ -29,6 +29,12 @@ from src.metrics import (
     latent_drift_series,
     summarize_run,
 )
+from src.plugins import get_default_registry as _get_plugin_registry
+from src.registry import (
+    PromptPack,
+    PromptPackRegistry,
+    get_default_pack_registry,
+)
 from src.runstore import (
     RunRecord,
     RunStore,
@@ -61,6 +67,10 @@ RUN_STORE: RunStore = get_default_runstore()
 
 # Per-process pub/sub hub used by the `/runs/{id}/stream` WebSocket.
 STREAM_HUB: StreamHub = get_default_hub()
+
+# Phase 6 — Community Prompt Registry. Loaded lazily on first access;
+# overlay packs can be added via PAE_PROMPT_PACKS_DIR.
+PROMPT_PACK_REGISTRY: PromptPackRegistry = get_default_pack_registry()
 
 API_KEYS = {
     "demo-free-key": {"user_id": "u_demo", "plan": "free", "rate_limit": 120},    # req/hour
@@ -104,7 +114,7 @@ class StepResult(BaseModel):
     state_snapshot: list[float] = []
 
 # ------------------------- app -------------------------
-APP_VERSION = "0.2.0"
+APP_VERSION = "0.6.0"
 app = FastAPI(title="Prompt Atlas Engine API", version=APP_VERSION)
 app.add_middleware(
     CORSMiddleware,
@@ -140,14 +150,83 @@ def pricing():
     }
 
 @app.get("/prompt-packs", response_model=dict)
-def prompt_packs():
-    packs = [
-        {"id": "myth-1", "title": "Myth & Meaning", "domain": "myth", "tags": ["archetype", "narrative"]},
-        {"id": "science-1", "title": "Science & Precision", "domain": "science", "tags": ["model", "measure"]},
-        {"id": "psych-1", "title": "Psychology & Self", "domain": "psych", "tags": ["bias", "empathy"]},
-        {"id": "purpose-1", "title": "Profit & Purpose", "domain": "purpose", "tags": ["ethics", "impact"]},
-    ]
-    return {"packs": packs}
+def prompt_packs(
+    domain: Optional[str] = Query(None, description="Filter by pack domain"),
+    tag: Optional[str] = Query(None, description="Filter by tag"),
+    q: Optional[str] = Query(None, description="Free-text search"),
+    limit: int = Query(50, ge=1, le=200),
+    offset: int = Query(0, ge=0),
+):
+    """List packs in the Community Prompt Registry (Phase 6).
+
+    Backwards-compatible with the Phase 1 stub: the bundled seed packs
+    keep the same IDs (``myth-1``, ``science-1``, ``psych-1``,
+    ``purpose-1``) so existing clients keep working.
+    """
+    registry = PROMPT_PACK_REGISTRY
+    matching = registry.list(domain=domain, tag=tag, query=q)
+    page = matching[offset : offset + limit]
+    return {
+        "total": len(matching),
+        "offset": offset,
+        "limit": limit,
+        "packs": [
+            {
+                "id": p.id,
+                "version": p.version,
+                "title": p.title,
+                "domain": p.domain,
+                "tags": p.tags,
+                "description": p.description,
+                "author": p.author,
+                "prompt_count": len(p.prompts),
+            }
+            for p in page
+        ],
+    }
+
+
+@app.get("/prompt-packs/{pack_id}", response_model=dict)
+def prompt_pack_detail(pack_id: str):
+    pack = PROMPT_PACK_REGISTRY.get(pack_id)
+    if pack is None:
+        raise HTTPException(status_code=404, detail="Prompt pack not found")
+    return pack.model_dump()
+
+
+@app.get("/prompt-packs/{pack_id}/prompts/{prompt_name}", response_model=dict)
+def prompt_pack_template(pack_id: str, prompt_name: str):
+    pack = PROMPT_PACK_REGISTRY.get(pack_id)
+    if pack is None:
+        raise HTTPException(status_code=404, detail="Prompt pack not found")
+    tmpl = pack.get_prompt(prompt_name)
+    if tmpl is None:
+        raise HTTPException(status_code=404, detail="Prompt template not found")
+    return tmpl.model_dump()
+
+
+@app.get("/plugins", response_model=dict)
+def list_plugins():
+    """List third-party extensions registered with the plugin system.
+
+    Returns only ``namespace`` / ``name`` / ``source`` / ``meta`` —
+    never the factory itself — so this endpoint stays safe to expose
+    publicly. Useful for the dashboard to show which providers are
+    selectable via ``PAE_LLM_PROVIDER`` / ``PAE_EMBEDDINGS_PROVIDER``.
+    """
+    registry = _get_plugin_registry()
+    return {
+        "namespaces": registry.namespaces(),
+        "plugins": [
+            {
+                "namespace": rec.namespace,
+                "name": rec.name,
+                "source": rec.source,
+                "meta": rec.meta,
+            }
+            for rec in registry.list()
+        ],
+    }
 
 @app.post("/runs", response_model=dict)
 def create_run(payload: RunCreate, auth=Depends(get_auth)):
