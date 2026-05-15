@@ -560,7 +560,7 @@ uvicorn server.app:app --reload
 open http://localhost:8000/dashboard/
 ```
 
-The landing page accepts an API key (stored only in `sessionStorage` for the tab), lists your runs, and links to a per-run page that renders:
+The landing page accepts an API key (held in memory for the page only — never persisted to `localStorage` / `sessionStorage` / cookies), lists your runs, and links to a per-run page that renders:
 
 - **E-Star trajectory** -- per-step certificate proxy.
 - **Latent drift** -- `‖state‖` and Δ over time.
