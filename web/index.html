@@ -17,8 +17,10 @@
       <h2>Sign in</h2>
       <p class="muted">
         Paste an API key (e.g. <code>demo-free-key</code>) to load your runs.
-        The key is stored in this tab only — it never leaves your browser
-        except as the <code>X-API-Key</code> header to this API.
+        The key is held in memory for this page only — it's never persisted
+        to <code>localStorage</code> / <code>sessionStorage</code> / cookies,
+        and never leaves your browser except as the <code>X-API-Key</code>
+        header to this API.
       </p>
       <form id="auth-form">
         <input id="api-key" type="text" placeholder="API key" autocomplete="off" required />
