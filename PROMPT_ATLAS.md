@@ -26,6 +26,7 @@ This canonical document holds the full prose. Companion materials in [`docs/prom
 | Glossary | [`docs/prompt-atlas/glossary.md`](docs/prompt-atlas/glossary.md) | Defined terms with anchors |
 | Thematic index | [`docs/prompt-atlas/index.md`](docs/prompt-atlas/index.md) | Cross-cutting threads (ethics, ecology, myth, etc.) |
 | Diagrams | [`docs/prompt-atlas/diagrams/`](docs/prompt-atlas/diagrams/) | One Mermaid diagram per Part |
+| **12-Week Course Syllabus** | [`docs/prompt-atlas/syllabus/`](docs/prompt-atlas/syllabus/) | Free, downloadable quest-based syllabus for curriculum directors — one chapter = one weekly quest |
 
 ---
 
