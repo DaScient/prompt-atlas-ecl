@@ -17,10 +17,20 @@ docs/prompt-atlas/
 │   └── part-iv-psyche.md
 ├── prompts/                 ← extracted prompts as structured YAML
 │   ├── ch01.yaml … ch07.yaml
-└── expansions/              ← per-chapter & per-part expansions
-    ├── part-i.md … part-iv.md
-    └── ch01-…md … ch07-…md
+├── expansions/              ← per-chapter & per-part expansions
+│   ├── part-i.md … part-iv.md
+│   └── ch01-…md … ch07-…md
+└── syllabus/                ← free, downloadable 12-week course syllabus
+    ├── README.md
+    ├── 12-week-quest-syllabus.md
+    ├── instructor-adoption-kit.md
+    ├── weekly-quest-cards.md
+    └── pitch-to-curriculum-directors.md
 ```
+
+## 🎓 Course Syllabus — *Twelve Quests for the Recursive Age*
+
+A free 12-week course built directly on the Atlas, mapping each weekly **quest** to one chapter. Designed for curriculum directors, learning designers, and instructors at any level. See [`syllabus/`](syllabus/) — start with [`syllabus/README.md`](syllabus/README.md).
 
 Each chapter expansion follows a consistent template:
 

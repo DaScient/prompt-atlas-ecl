@@ -242,3 +242,56 @@ repo_cross_links:
 resources:
   glossary: "glossary.md"
   thematic_index: "index.md"
+
+# 12-week downloadable course syllabus that uses Atlas chapters as weekly "quests."
+# Marketed toward curriculum directors; free, openly licensed, LMS-importable.
+syllabus:
+  id: "twelve-quests"
+  title: "The Prompt Atlas — Twelve Quests for the Recursive Age"
+  weeks: 12
+  root: "syllabus/"
+  files:
+    readme: "syllabus/README.md"
+    syllabus: "syllabus/12-week-quest-syllabus.md"
+    adoption_kit: "syllabus/instructor-adoption-kit.md"
+    quest_cards: "syllabus/weekly-quest-cards.md"
+    pitch: "syllabus/pitch-to-curriculum-directors.md"
+  # Each week maps 1:1 to a chapter. Chapters 13–14 are reserved for the
+  # optional Festival Week and the Capstone.
+  quests:
+    - week: 1
+      chapter: 1
+      title: "The Honest Ledger"
+    - week: 2
+      chapter: 2
+      title: "The Economy as a Forest"
+    - week: 3
+      chapter: 3
+      title: "The Mythwright's Apprentice"  # spec week: co-write a myth with an AI
+    - week: 4
+      chapter: 4
+      title: "The Translator's Oath"
+    - week: 5
+      chapter: 5
+      title: "Listening to the Noise"
+    - week: 6
+      chapter: 6
+      title: "The Living Prompt"
+    - week: 7
+      chapter: 7
+      title: "The Mirror that Argues Back"
+    - week: 8
+      chapter: 8
+      title: "Citizen of the Machine"
+    - week: 9
+      chapter: 9
+      title: "The Martian Constitution"
+    - week: 10
+      chapter: 10
+      title: "Information as Salt"
+    - week: 11
+      chapter: 11
+      title: "The Collapse Drill"
+    - week: 12
+      chapter: 12
+      title: "Designing What Stays"
