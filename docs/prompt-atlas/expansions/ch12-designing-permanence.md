@@ -67,3 +67,7 @@
 - Niccolò Machiavelli, *Discourses on Livy* — on republican renewal.
 - Vint Cerf, "Avoiding a Digital Dark Age" (American Scientist, 2011).
 - The Long Now Foundation — `https://longnow.org`.
+
+---
+
+<sub>Donations: [cash.app/dascient](https://cash.app/dascient/) — supports DaScient, Inc., a non-profit organization aimed to promote accessible intelligence and community learning through various mediums and platforms.</sub>

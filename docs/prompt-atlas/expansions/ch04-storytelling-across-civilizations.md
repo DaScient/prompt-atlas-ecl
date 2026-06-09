@@ -65,3 +65,7 @@
 - Marie-Louise von Franz, *The Interpretation of Fairy Tales* (1970).
 - Ngũgĩ wa Thiong'o, *Decolonising the Mind* (1986).
 - The World Oral Literature Project — `https://www.oralliterature.org/`.
+
+---
+
+<sub>Donations: [cash.app/dascient](https://cash.app/dascient/) — supports DaScient, Inc., a non-profit organization aimed to promote accessible intelligence and community learning through various mediums and platforms.</sub>

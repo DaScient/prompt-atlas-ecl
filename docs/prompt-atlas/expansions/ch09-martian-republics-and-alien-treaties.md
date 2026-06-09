@@ -68,3 +68,7 @@ A minimum-viable bicameral charter:
 - Outer Space Treaty (1967); Moon Agreement (1979).
 - Elinor Ostrom, *Governing the Commons* (1990).
 - Carl Sagan, *Pale Blue Dot* (1994) — the framing question.
+
+---
+
+<sub>Donations: [cash.app/dascient](https://cash.app/dascient/) — supports DaScient, Inc., a non-profit organization aimed to promote accessible intelligence and community learning through various mediums and platforms.</sub>

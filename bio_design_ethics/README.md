@@ -67,3 +67,7 @@ The long-term objective of this branch of Prompt Atlas is to evolve toward:
 
 AI-guided biology is not an endpoint—it is a new beginning in the ongoing dialogue between life and intelligence.
 This directory documents our first steps into that dialogue.
+
+---
+
+<sub>Donations: [cash.app/dascient](https://cash.app/dascient/) — supports DaScient, Inc., a non-profit organization aimed to promote accessible intelligence and community learning through various mediums and platforms.</sub>

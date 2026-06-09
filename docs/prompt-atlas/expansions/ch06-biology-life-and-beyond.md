@@ -67,3 +67,7 @@
 - Robert Pollack, *Signs of Life* (1994).
 - Jennifer Doudna & Sam Sternberg, *A Crack in Creation* (2017).
 - Asilomar Conference on Recombinant DNA (1975) — historical model for self-imposed bio-research moratoria.
+
+---
+
+<sub>Donations: [cash.app/dascient](https://cash.app/dascient/) — supports DaScient, Inc., a non-profit organization aimed to promote accessible intelligence and community learning through various mediums and platforms.</sub>

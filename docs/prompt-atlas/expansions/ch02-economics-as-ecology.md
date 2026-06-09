@@ -66,3 +66,7 @@
 - Herman Daly, *Beyond Growth* (1996).
 - Donella Meadows, *Thinking in Systems* (2008) — leverage points and feedback loops.
 - IPCC AR6 — for the physical baseline against which ecological dividends must be denominated.
+
+---
+
+<sub>Donations: [cash.app/dascient](https://cash.app/dascient/) — supports DaScient, Inc., a non-profit organization aimed to promote accessible intelligence and community learning through various mediums and platforms.</sub>

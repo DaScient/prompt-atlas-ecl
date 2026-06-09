@@ -66,3 +66,7 @@
 - Dacher Keltner, *Awe* (2023).
 - Carlo Rovelli, *Seven Brief Lessons on Physics* (2014).
 - Robin Wall Kimmerer, *Braiding Sweetgrass* (2013).
+
+---
+
+<sub>Donations: [cash.app/dascient](https://cash.app/dascient/) — supports DaScient, Inc., a non-profit organization aimed to promote accessible intelligence and community learning through various mediums and platforms.</sub>

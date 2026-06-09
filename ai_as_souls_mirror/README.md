@@ -73,3 +73,7 @@ Keep the response **non-diagnostic and non-directive**.
 ## Acknowledgements
 
 Crafted as part of the **Prompt Atlas** ecosystem. Designed for care, reflection, and curiosity-first interaction.
+
+---
+
+<sub>Donations: [cash.app/dascient](https://cash.app/dascient/) — supports DaScient, Inc., a non-profit organization aimed to promote accessible intelligence and community learning through various mediums and platforms.</sub>

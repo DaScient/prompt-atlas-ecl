@@ -1275,3 +1275,7 @@ Please cite or link back to this repository when referencing the ECL framework.
 [Back to Top](#)
 
 </div>
+
+---
+
+<sub>Donations: [cash.app/dascient](https://cash.app/dascient/) — supports DaScient, Inc., a non-profit organization aimed to promote accessible intelligence and community learning through various mediums and platforms.</sub>

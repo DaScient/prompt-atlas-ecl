@@ -66,3 +66,7 @@ A consortium ledger:
 - Vernor Vinge, *A Fire Upon the Deep* (1992) — operational fiction of cosmic information markets.
 - Long Now Foundation, *The Rosetta Project*.
 - Internet Archive — `https://archive.org` — practical model of distributed memory guardianship.
+
+---
+
+<sub>Donations: [cash.app/dascient](https://cash.app/dascient/) — supports DaScient, Inc., a non-profit organization aimed to promote accessible intelligence and community learning through various mediums and platforms.</sub>

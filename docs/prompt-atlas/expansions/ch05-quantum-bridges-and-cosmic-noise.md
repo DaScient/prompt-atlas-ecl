@@ -65,3 +65,7 @@
 - Sabine Hossenfelder, *Lost in Math* (2018).
 - Carlo Rovelli, *Helgoland* (2020).
 - Ioannidis, J. P. A. (2005), "Why Most Published Research Findings Are False" — for the discipline of pre-registration.
+
+---
+
+<sub>Donations: [cash.app/dascient](https://cash.app/dascient/) — supports DaScient, Inc., a non-profit organization aimed to promote accessible intelligence and community learning through various mediums and platforms.</sub>
