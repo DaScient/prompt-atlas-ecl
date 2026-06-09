@@ -71,3 +71,7 @@
 - Kate Raworth, *Doughnut Economics* (2017) — operationalizes ecological + social floors and ceilings.
 - Elinor Ostrom, *Governing the Commons* (1990) — multi-stakeholder design principles.
 - Long Now Foundation — `https://longnow.org` — for the institutional posture behind century dividends.
+
+---
+
+<sub>Donations: [cash.app/dascient](https://cash.app/dascient/) — supports DaScient, Inc., a non-profit organization aimed to promote accessible intelligence and community learning through various mediums and platforms.</sub>

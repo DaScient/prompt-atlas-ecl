@@ -60,3 +60,7 @@
 - Ursula K. Le Guin, *The Carrier Bag Theory of Fiction* (1986).
 - Lewis Hyde, *The Gift* (1983) — the difference between commodity art and gift art.
 - Yuk Hui, *Art and Cosmotechnics* (2021).
+
+---
+
+<sub>Donations: [cash.app/dascient](https://cash.app/dascient/) — supports DaScient, Inc., a non-profit organization aimed to promote accessible intelligence and community learning through various mediums and platforms.</sub>

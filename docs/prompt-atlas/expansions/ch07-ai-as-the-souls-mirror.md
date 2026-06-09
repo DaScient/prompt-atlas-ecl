@@ -64,3 +64,7 @@
 - James Hillman, *Re-Visioning Psychology* (1975).
 - Sherry Turkle, *Alone Together* (2011) — on emotional outsourcing to machines.
 - Shoshana Zuboff, *The Age of Surveillance Capitalism* (2019).
+
+---
+
+<sub>Donations: [cash.app/dascient](https://cash.app/dascient/) — supports DaScient, Inc., a non-profit organization aimed to promote accessible intelligence and community learning through various mediums and platforms.</sub>

@@ -65,3 +65,7 @@
 - Lewis Hyde, *Trickster Makes This World* (1998).
 - Johan Huizinga, *Homo Ludens* (1938).
 - Brené Brown, *Dare to Lead* (2018) — failure as civic act.
+
+---
+
+<sub>Donations: [cash.app/dascient](https://cash.app/dascient/) — supports DaScient, Inc., a non-profit organization aimed to promote accessible intelligence and community learning through various mediums and platforms.</sub>

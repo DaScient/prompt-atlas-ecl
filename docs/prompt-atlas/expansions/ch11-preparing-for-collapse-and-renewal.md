@@ -66,3 +66,7 @@
 - Joseph Tainter, *The Collapse of Complex Societies* (1988).
 - Donella Meadows, *Thinking in Systems* (2008).
 - Andy Stirling, *Keep It Complex* (Nature, 2010).
+
+---
+
+<sub>Donations: [cash.app/dascient](https://cash.app/dascient/) — supports DaScient, Inc., a non-profit organization aimed to promote accessible intelligence and community learning through various mediums and platforms.</sub>

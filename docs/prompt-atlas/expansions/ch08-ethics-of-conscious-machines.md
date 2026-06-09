@@ -70,3 +70,7 @@ A precautionary protocol under the **ethics of doubt**:
 - Thomas Nagel, "What Is It Like to Be a Bat?" (1974).
 - Susan Schneider, *Artificial You* (2019).
 - Eric Schwitzgebel & Mara Garza, "A Defense of the Rights of Artificial Intelligences" (2015).
+
+---
+
+<sub>Donations: [cash.app/dascient](https://cash.app/dascient/) — supports DaScient, Inc., a non-profit organization aimed to promote accessible intelligence and community learning through various mediums and platforms.</sub>
